@@ -1,4 +1,6 @@
 Cse532SocialNetwork::Application.routes.draw do
+  resources :friend_requests
+
   resources :users
 
   # The priority is based upon order of creation:

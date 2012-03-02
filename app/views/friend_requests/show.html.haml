@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @friend_request.user_id
+%p
+  %b Requester:
+  = @friend_request.requester_id
+
+= link_to 'Edit', edit_friend_request_path(@friend_request)
+\|
+= link_to 'Back', friend_requests_path
