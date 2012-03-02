@@ -10,12 +10,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120302152230) do
+ActiveRecord::Schema.define(:version => 20120302152721) do
 
   create_table "comments", :force => true do |t|
     t.integer  "post_id"
     t.integer  "user_id"
     t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "friend_requests", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "requester_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
