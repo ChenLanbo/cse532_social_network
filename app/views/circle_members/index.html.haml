@@ -1,0 +1,21 @@
+%h1 Listing circle_members
+
+%table
+  %tr
+    %th Circle
+    %th User
+    %th
+    %th
+    %th
+
+  - @circle_members.each do |circle_member|
+    %tr
+      %td= circle_member.circle_id
+      %td= circle_member.user_id
+      %td= link_to 'Show', circle_member
+      %td= link_to 'Edit', edit_circle_member_path(circle_member)
+      %td= link_to 'Destroy', circle_member, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Circle member', new_circle_member_path

@@ -1,4 +1,6 @@
 Cse532SocialNetwork::Application.routes.draw do
+  resources :circle_members
+
   resources :circles
 
   resources :friends

@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Circle:
+  = @circle_member.circle_id
+%p
+  %b User:
+  = @circle_member.user_id
+
+= link_to 'Edit', edit_circle_member_path(@circle_member)
+\|
+= link_to 'Back', circle_members_path
