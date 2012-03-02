@@ -1,4 +1,10 @@
 Cse532SocialNetwork::Application.routes.draw do
+  get "sessions/new"
+
+  get "sessions/create"
+
+  get "sessions/destroy"
+
   resources :circle_members
 
   resources :circles
