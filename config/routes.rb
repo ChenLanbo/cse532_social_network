@@ -1,4 +1,6 @@
 Cse532SocialNetwork::Application.routes.draw do
+  resources :friends
+
   resources :friend_requests
 
   resources :users
