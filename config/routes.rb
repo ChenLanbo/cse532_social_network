@@ -1,9 +1,14 @@
 Cse532SocialNetwork::Application.routes.draw do
-  get "sessions/new"
 
-  get "sessions/create"
-
-  get "sessions/destroy"
+	# get "sessions/new"
+	# get "sessions/create"
+	# get "sessions/destroy"
+	controller :sessions do
+		get 'login' => :new
+		post 'login' => :create
+		delete 'logout' => :destroy
+		get 'logout' => :destroy
+	end
 
   resources :circle_members
 
