@@ -4,14 +4,6 @@
   %tr
     %th First name
     %th Last name
-    %th Email
-    %th Hashed password
-    %th Salt
-    %th Day of birth
-    %th Month of birth
-    %th Year of birth
-    %th Gender
-    %th Address
     %th
     %th
     %th
@@ -20,14 +12,6 @@
     %tr
       %td= user.first_name
       %td= user.last_name
-      %td= user.email
-      %td= user.hashed_password
-      %td= user.salt
-      %td= user.day_of_birth
-      %td= user.month_of_birth
-      %td= user.year_of_birth
-      %td= user.gender
-      %td= user.address
       %td= link_to 'Show', user
       %td= link_to 'Edit', edit_user_path(user)
       %td= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete

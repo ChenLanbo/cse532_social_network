@@ -8,6 +8,17 @@
 </head>
 <body>
 
+<div id="wrapper-header">
+	<div id="navigationBar">
+		<% if session[:user_id] %>
+			<%= link_to "Logout", :controller => :sessions, :action => :destroy %>
+		<% else %>
+			<%= link_to "Login", :controller => :sessions, :action => :new %>
+			<%= link_to "Signup", :controller => :users, :action => :new %>
+		<% end %>
+	</div>
+</div>
+
 <%= yield %>
 
 </body>
