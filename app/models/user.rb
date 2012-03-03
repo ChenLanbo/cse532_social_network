@@ -26,11 +26,11 @@ class User < ActiveRecord::Base
 	end
 
 	def User.authenticate(email, password)
-		puts "*******************************"
+		puts "*******************************" + password
 		if email == "" or password == ""
 			return nil
 		end
-		if user = find_by_email and user.hashed_password == encrypt_password(password, user.salt)
+		if user = find_by_email(email) and user.hashed_password == encrypt_password(password, user.salt)
 			user
 		else
 			return nil
