@@ -1,5 +1,7 @@
 Cse532SocialNetwork::Application.routes.draw do
 
+  resources :groups
+
   resources :posts
 
   resources :pages
