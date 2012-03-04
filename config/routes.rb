@@ -1,5 +1,7 @@
 Cse532SocialNetwork::Application.routes.draw do
 
+  resources :posts
+
   resources :pages
 
 	# get "sessions/new"
