@@ -2,7 +2,8 @@ class CirclesController < ApplicationController
   # GET /circles
   # GET /circles.json
   def index
-    @circles = Circle.all
+    @circles = Circle.find_by_sql("SELECT * FROM circles WHERE user_id = #{session[:user_id]}")
+		@circle = Circle.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,10 +42,12 @@ class CirclesController < ApplicationController
   # POST /circles.json
   def create
     @circle = Circle.new(params[:circle])
+		@circle.user_id = session[:user_id]
 
     respond_to do |format|
       if @circle.save
-        format.html { redirect_to @circle, :notice => 'Circle was successfully created.' }
+        format.html { redirect_to circles_url, :notice => 'Circle was successfully created.' }
+				format.js
         format.json { render :json => @circle, :status => :created, :location => @circle }
       else
         format.html { render :action => "new" }

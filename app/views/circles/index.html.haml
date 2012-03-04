@@ -1,21 +1,7 @@
-%h1 Listing circles
+%h2 Your Circles
 
-%table
-  %tr
-    %th Name
-    %th User
-    %th
-    %th
-    %th
+= render 'form'
 
-  - @circles.each do |circle|
-    %tr
-      %td= circle.name
-      %td= circle.user_id
-      %td= link_to 'Show', circle
-      %td= link_to 'Edit', edit_circle_path(circle)
-      %td= link_to 'Destroy', circle, :confirm => 'Are you sure?', :method => :delete
+.circleList
+	= render @circles
 
-%br
-
-= link_to 'New Circle', new_circle_path
