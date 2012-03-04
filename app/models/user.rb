@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 	has_many :friends_requests, :dependent => :destroy
 	has_many :circles, :dependent => :destroy
 	has_many :circle_members, :dependent => :destroy
+	has_many :groups, :dependent => :destroy
+	has_many :group_members, :dependent => :destroy
 	has_many :posts, :dependent => :destroy
 
 	# Validations

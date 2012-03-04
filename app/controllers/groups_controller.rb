@@ -3,7 +3,6 @@ class GroupsController < ApplicationController
   # GET /groups.json
   def index
     @groups = Group.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @groups }
@@ -41,7 +40,7 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(params[:group])
-
+		@group.user_id = session[:user_id]
     respond_to do |format|
       if @group.save
         format.html { redirect_to @group, :notice => 'Group was successfully created.' }
