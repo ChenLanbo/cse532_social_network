@@ -1,15 +1,7 @@
-%h2 People you may know
 
-%table
-	%tr
-		%th First name
-		%th Last name
-
-	- @users.each do |user|
-		%tr
-			%td= user.first_name
-			%td= user.last_name
-			%td
-				= button_to "Send Request", friend_requests_path(:requester_id => user.id)
-%br
-
+- if @users.length > 0
+	%h2 People you may know
+	.userList
+		= render @users
+- else
+	%h2 No suggestion

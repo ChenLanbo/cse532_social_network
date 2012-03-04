@@ -1,0 +1,4 @@
+.aUser
+	%p
+		= user.first_name + " " + user.last_name
+		= button_to "Send Request", friend_requests_path(:requester_id => user.id)

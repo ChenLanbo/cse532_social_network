@@ -23,14 +23,17 @@
 </div>
 
 <div id="main">
-	<div id="leftBar">
-		<div>
-			<%= link_to "Friends", :controller => :friends, :action => :index %>
+	<% if session[:user_id] %>
+		<div id="leftBar">
+			<div>
+				<%= link_to "Friends", :controller => :friends, :action => :index %>
+			</div>
+			<div>
+				<%= link_to "Circles", :controller => :circles, :action => :index %>
+			</div>
 		</div>
-		<div>
-			<%= link_to "Circles", :controller => :circles, :action => :index %>
-		</div>
-	</div>
+	<% end %>
+
 	<div id="mainBar">
 		<%= yield %>
 	</div>
