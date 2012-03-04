@@ -2,7 +2,8 @@ class FriendsController < ApplicationController
   # GET /friends
   # GET /friends.json
   def index
-    @friends = Friend.all
+		@friends = Friend.find_by_sql("SELECT friends.*, users.first_name, users.last_name FROM friends, users WHERE friends.user_id = #{session[:user_id]} AND friends.fu_id = users.id");
+
 
     respond_to do |format|
       format.html # index.html.erb

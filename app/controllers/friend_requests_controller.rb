@@ -2,7 +2,8 @@ class FriendRequestsController < ApplicationController
   # GET /friend_requests
   # GET /friend_requests.json
   def index
-    @friend_requests = FriendRequest.all
+		@friend_requests = FriendRequest.find_by_sql("SELECT friend_requests.id, users.first_name, users.last_name FROM friend_requests, users WHERE friend_requests.user_id = #{session[:user_id]} and users.id = friend_requests.requester_id");
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -40,11 +41,13 @@ class FriendRequestsController < ApplicationController
   # POST /friend_requests
   # POST /friend_requests.json
   def create
-    @friend_request = FriendRequest.new(params[:friend_request])
+		@friend_request = FriendRequest.new()
+		@friend_request.user_id = params[:requester_id]
+		@friend_request.requester_id = session[:user_id]
 
     respond_to do |format|
       if @friend_request.save
-        format.html { redirect_to @friend_request, :notice => 'Friend request was successfully created.' }
+				format.html { redirect_to users_path, :notice => 'Friend request was successfully sent.' }
         format.json { render :json => @friend_request, :status => :created, :location => @friend_request }
       else
         format.html { render :action => "new" }
@@ -59,8 +62,15 @@ class FriendRequestsController < ApplicationController
     @friend_request = FriendRequest.find(params[:id])
 
     respond_to do |format|
-      if @friend_request.update_attributes(params[:friend_request])
-        format.html { redirect_to @friend_request, :notice => 'Friend request was successfully updated.' }
+      if @friend_request
+				tmp = FriendRequest.find_by_sql("SELECT * FROM friend_requests WHERE user_id = #{@friend_request.requester_id} and requester_id = #{@friend_request.user_id} LIMIT 1")
+				Friend.create(:user_id => session[:user_id], :fu_id => @friend_request.requester_id)
+				Friend.create(:user_id => @friend_request.requester_id, :fu_id => session[:user_id])
+
+				@friend_request.destroy
+				tmp[0].destroy if tmp.length > 0
+
+        format.html { redirect_to friend_requests_url, :notice => 'Friend request was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }

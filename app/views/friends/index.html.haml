@@ -1,20 +1,11 @@
-%h1 Listing friends
+%h2 Your Friends
 
 %table
-  %tr
-    %th User
-    %th Fu
-    %th
-    %th
-    %th
 
   - @friends.each do |friend|
     %tr
-      %td= friend.user_id
-      %td= friend.fu_id
-      %td= link_to 'Show', friend
-      %td= link_to 'Edit', edit_friend_path(friend)
-      %td= link_to 'Destroy', friend, :confirm => 'Are you sure?', :method => :delete
+      %td= friend.first_name + " " + friend.last_name
+      %td= link_to 'Unfriend', friend, :confirm => 'Are you sure?', :method => :delete
 
 %br
 

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+		@users = User.find_by_sql("SELECT * from users WHERE id not in (#{session[:user_id]}) and id not in (SELECT fu_id from friends WHERE user_id = #{session[:user_id]})")
 
     respond_to do |format|
       format.html # index.html.erb

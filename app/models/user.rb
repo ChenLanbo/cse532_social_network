@@ -1,6 +1,9 @@
 require 'digest/sha2'
 
 class User < ActiveRecord::Base
+	# Dependencies
+	has_many :friends, :dependent => :destroy
+	has_many :friends_requests, :dependent => :destroy
 
 	# Validations
 	validates :first_name, :presence => true

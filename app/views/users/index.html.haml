@@ -1,21 +1,15 @@
-%h1 Listing users
+%h2 People you may know
 
 %table
-  %tr
-    %th First name
-    %th Last name
-    %th
-    %th
-    %th
+	%tr
+		%th First name
+		%th Last name
 
-  - @users.each do |user|
-    %tr
-      %td= user.first_name
-      %td= user.last_name
-      %td= link_to 'Show', user
-      %td= link_to 'Edit', edit_user_path(user)
-      %td= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete
-
+	- @users.each do |user|
+		%tr
+			%td= user.first_name
+			%td= user.last_name
+			%td
+				= button_to "Send Request", friend_requests_path(:requester_id => user.id)
 %br
 
-= link_to 'New User', new_user_path
