@@ -4,7 +4,6 @@ class FriendsController < ApplicationController
   def index
 		@friends = Friend.find_by_sql("SELECT friends.*, users.first_name, users.last_name FROM friends, users WHERE friends.user_id = #{session[:user_id]} AND friends.fu_id = users.id");
 
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @friends }
@@ -73,8 +72,10 @@ class FriendsController < ApplicationController
   # DELETE /friends/1
   # DELETE /friends/1.json
   def destroy
-    @friend = Friend.find(params[:id])
-    @friend.destroy
+		@friend1 = Friend.find(params[:id])
+		@friend2 = Friend.find_by_sql("SELECT * FROM friends WHERE user_id = #{@friend1.fu_id} and fu_id = #{session[:user_id]} LIMIT 1")
+		@friend1.destroy
+		@friend2[0].destroy if @friend2.length > 0
 
     respond_to do |format|
       format.html { redirect_to friends_url }
