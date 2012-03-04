@@ -7,3 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+function delete_new_circle_member(e) {
+	$(e).closest(".newCircleMember").remove();
+}

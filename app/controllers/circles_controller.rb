@@ -4,6 +4,7 @@ class CirclesController < ApplicationController
   def index
     @circles = Circle.find_by_sql("SELECT * FROM circles WHERE user_id = #{session[:user_id]}")
 		@circle = Circle.new
+		@circle.user_id = -1
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,6 +16,7 @@ class CirclesController < ApplicationController
   # GET /circles/1.json
   def show
     @circle = Circle.find(params[:id])
+		@circle_members = CircleMember.find_by_sql("SELECT circle_members.*, users.first_name, users.last_name FROM circle_members, users WHERE circle_members.circle_id = #{@circle.id} AND circle_members.user_id = users.id")
 
     respond_to do |format|
       format.html # show.html.erb

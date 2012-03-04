@@ -1,4 +1,4 @@
-= form_for(@circle, :remote => true) do |f|
+= form_for(@circle) do |f|
 	-if @circle.errors.any?
 		#error_explanation
 			%h2= "#{pluralize(@circle.errors.count, "error")} prohibited this circle from being saved:"
@@ -8,4 +8,7 @@
 
 	.field
 		= f.text_field :name, :size => 20, :id => 'newCircleName', :placeholder => 'Add new circle'
-		= f.submit 'Add'
+		- if @circle.user_id < 0
+			= f.submit 'Add'
+		- else
+			= f.submit 'Rename'

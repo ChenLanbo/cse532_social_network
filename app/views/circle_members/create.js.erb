@@ -1,0 +1,4 @@
+$(".circleMemberList").prepend('<%= escape_javascript(render(@circle_member)) %>');
+$(".newCircleMember").bind('ajax:success', function() {
+		$(this).fadeOut();
+});

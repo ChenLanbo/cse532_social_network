@@ -1,12 +1,19 @@
 %p#notice= notice
 
 %p
-  %b Name:
-  = @circle.name
-%p
-  %b User:
-  = @circle.user_id
+	%b= @circle.name
+	= link_to 'Rename', edit_circle_path(@circle)
+	\|
+	= link_to 'Back', circles_path
 
-= link_to 'Edit', edit_circle_path(@circle)
-\|
-= link_to 'Back', circles_path
+.circleMemberList
+	- if @circle_members.length == 0
+		%p No members, please add
+	- else
+		= render @circle_members
+
+.newCircleMemberDiv
+	= form_tag('/circle_members/new', :method => 'get', :remote => true, :circle_id => @circle.id) do
+		= hidden_field_tag :circle_id, @circle.id
+		= submit_tag "Add new members"
+	.newCircleMemberList

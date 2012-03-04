@@ -1,0 +1,10 @@
+- @friends.each do |friend|
+	.newCircleMember
+		= form_for(@circle_member, :remote => true) do |f|
+			= friend.first_name + " " + friend.last_name
+			= hidden_field_tag :circle_id, @circle_id
+			= hidden_field_tag :user_id, friend.fu_id
+			= hidden_field_tag :first_name, friend.first_name
+			= hidden_field_tag :last_name, friend.last_name
+			= f.submit 'Add'
+

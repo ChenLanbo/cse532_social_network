@@ -1,6 +1,5 @@
 .aCircle
 	%p
-		= circle.name
-		=link_to 'Show', circle
+		= link_to circle.name, circle
 		= link_to 'Rename', edit_circle_path(circle)
 		= link_to 'Destroy', circle, :confirm => 'Are you sure?', :method => :delete
