@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120304035014) do
+ActiveRecord::Schema.define(:version => 20120304045954) do
 
   create_table "circle_members", :force => true do |t|
     t.integer  "circle_id"
@@ -45,6 +45,14 @@ ActiveRecord::Schema.define(:version => 20120304035014) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "category"
+  end
+
+  create_table "posts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "page_id"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
