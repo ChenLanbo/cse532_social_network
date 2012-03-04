@@ -5,3 +5,7 @@
  *= require_self
  *= require_tree . 
 */
+
+#wrapper-header {
+	height: 75px;
+}

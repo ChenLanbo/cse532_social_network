@@ -12,4 +12,12 @@ class ApplicationController < ActionController::Base
 			redirect_to login_url, :notice => "Please Log In"
 		end	
 	end
+
+	def current_user
+		if @current_user == nil
+			@current_user = User.find_by_id(session[:user_id])
+		end
+		@current_user
+	end
+
 end

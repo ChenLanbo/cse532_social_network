@@ -14,7 +14,8 @@ class PagesController < ApplicationController
   # GET /pages/1.json
   def show
     @page = Page.find(params[:id])
-
+		@posts = Post.find_by_sql("SELECT posts.*, users.first_name, users.last_name FROM posts, users WHERE posts.page_id = #{@page.id} AND posts.user_id = users.id ORDER BY updated_at DESC")
+		@post = Post.new
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @page }

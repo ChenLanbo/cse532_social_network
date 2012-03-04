@@ -1,12 +1,5 @@
-%p#notice= notice
-
-%p
-  %b Category:
-  = @page.category
-%p
-  %b Owner:
-  = @page.owner
-
-= link_to 'Edit', edit_page_path(@page)
-\|
-= link_to 'Back', pages_path
+= render 'posts/form'
+%h3 News Feed
+%br
+.newsFeed
+	= render @posts

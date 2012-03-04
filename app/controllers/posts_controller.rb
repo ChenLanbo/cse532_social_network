@@ -41,10 +41,21 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(params[:post])
+		puts "+++++++++++++++++ " + @post.page_id.to_s
+		@post.user_id = session[:user_id]
 
     respond_to do |format|
       if @post.save
+
+				@post.instance_eval("def last_name; return @last_name; end")
+				@post.instance_eval("def last_name=(value); @last_name = value; end")
+				@post.instance_eval("def first_name; return @first_name; end")
+				@post.instance_eval("def first_name=(value); @first_name = value; end")
+				@post.last_name = current_user.last_name
+				@post.first_name = current_user.first_name
+
         format.html { redirect_to @post, :notice => 'Post was successfully created.' }
+				format.js
         format.json { render :json => @post, :status => :created, :location => @post }
       else
         format.html { render :action => "new" }
