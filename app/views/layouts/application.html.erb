@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<div id="wrapper-header">
+<div id="header">
 	<div id="navigationBar">
 		<% if session[:user_id] %>
 			<%= link_to "Friends", :controller => :friends, :action => :index %>
@@ -22,7 +22,21 @@
 	</div>
 </div>
 
-<%= yield %>
+<div id="main">
+	<div id="leftBar">
+		<div>
+			<%= link_to "Friends", :controller => :friends, :action => :index %>
+		</div>
+		<div>
+			<%= link_to "Circles", :controller => :circles, :action => :index %>
+		</div>
+	</div>
+	<div id="mainBar">
+		<%= yield %>
+	</div>
+	<div id="rightBar">
+	</div>
+</div>
 
 </body>
 </html>

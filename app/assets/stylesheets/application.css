@@ -6,6 +6,32 @@
  *= require_tree . 
 */
 
-#wrapper-header {
+body {
+	margin-left:125px;
+	margin-right:125px;
+}
+
+a {
+		text-decoration: none;
+}
+
+#header {
 	height: 75px;
+}
+
+#main {
+}
+
+#leftBar {
+	width: 150px;
+	border: 1px solid #B8D4E8;
+	background-color: #F0F5F8;
+	padding:15px;
+	position: relative;
+	float: left;
+}
+
+#mainBar {
+	margin: 10px;
+	float: left;
 }
