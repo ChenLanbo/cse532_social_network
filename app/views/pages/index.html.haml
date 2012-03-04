@@ -2,7 +2,7 @@
 
 %table
   %tr
-    %th Type
+    %th Category
     %th Owner
     %th
     %th
@@ -10,7 +10,7 @@
 
   - @pages.each do |page|
     %tr
-      %td= page.type
+      %td= page.category
       %td= page.owner
       %td= link_to 'Show', page
       %td= link_to 'Edit', edit_page_path(page)

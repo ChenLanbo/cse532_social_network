@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
 	end
 
 	def User.authenticate(email, password)
-		puts "*******************************" + password
+		# puts "*******************************" + password
 		if email == "" or password == ""
 			return nil
 		end
