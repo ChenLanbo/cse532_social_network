@@ -1,4 +1,6 @@
 class Page < ActiveRecord::Base
+	has_many :posts, :dependent => :destroy
+
 	validates :category, :presence => true
 	validates :category, :inclusion => { :in => %w(user sip), :message => "%{value} is not a valid value" }
 	validates :owner, :presence => true
