@@ -4,6 +4,12 @@ class FriendsController < ApplicationController
   def index
 		@friends = Friend.find_by_sql("SELECT friends.*, users.first_name, users.last_name FROM friends, users WHERE friends.user_id = #{session[:user_id]} AND friends.fu_id = users.id");
 
+		@friends.each do |f|
+			f.instance_eval("def page; @page; end")
+			f.instance_eval("def page=(v); @page = v; end")
+			f.page = Page.find_by_sql("SELECT * FROM pages WHERE category = 'user' AND owner = #{f.fu_id}")[0]
+		end
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @friends }

@@ -6,6 +6,10 @@ Cse532SocialNetwork::Application.routes.draw do
 
   resources :groups
 
+	controller :groups do
+		get 'groupsearch' => :search
+	end
+
   resources :posts
 
   resources :pages

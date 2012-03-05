@@ -2,7 +2,7 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @groups = Group.find_by_sql("SELECT * from groups WHERE user_id = #{session[:user_id]} or id in (SELECT group_id FROM group_members WHERE user_id = #{session[:user_id]})")
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @groups }
@@ -85,4 +85,10 @@ class GroupsController < ApplicationController
       format.json { head :ok }
     end
   end
+
+	# GET /groupsearch
+	def search
+		@groups = Group.find_by_sql("SELECT * from groups WHERE user_id != '#{session[:user_id]}' AND id NOT IN (SELECT group_id FROM group_members WHERE user_id = #{session[:user_id]})")
+		render
+	end
 end
