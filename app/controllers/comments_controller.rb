@@ -41,10 +41,20 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(params[:comment])
+		@comment.post_id = params[:post_id]
+		@comment.user_id = session[:user_id]
 
     respond_to do |format|
       if @comment.save
+				@comment.instance_eval("def last_name; return @last_name; end")
+				@comment.instance_eval("def last_name=(value); @last_name = value; end")
+				@comment.instance_eval("def first_name; return @first_name; end")
+				@comment.instance_eval("def first_name=(value); @first_name = value; end")
+				@comment.last_name = current_user.last_name
+				@comment.first_name = current_user.first_name
+
         format.html { redirect_to @comment, :notice => 'Comment was successfully created.' }
+				format.js
         format.json { render :json => @comment, :status => :created, :location => @comment }
       else
         format.html { render :action => "new" }

@@ -1,4 +1,14 @@
 .aFeed
 	%p= post.content
 	%p= post.updated_at
-	%p= post.first_name + " " + post.last_name
+	%p= "Posted by " + post.first_name + " " + post.last_name
+
+	.newComment
+		= form_for(@comment, :remote => true) do |ff|
+			= hidden_field_tag :post_id, post.id
+			.field
+				= ff.text_area :content, :cols => 50, :rows => 2
+			.actions
+				= ff.submit 'Comment'
+	.commentList
+		= render post.comments

@@ -15,7 +15,14 @@ class PagesController < ApplicationController
   def show
     @page = Page.find(params[:id])
 		@posts = Post.find_by_sql("SELECT posts.*, users.first_name, users.last_name FROM posts, users WHERE posts.page_id = #{@page.id} AND posts.user_id = users.id ORDER BY updated_at DESC")
+		@posts.each do |pp|
+			pp.instance_eval("def comments; @comments; end")
+			pp.instance_eval("def comments=(value); @comments = value; end")
+			pp.comments = Comment.find_by_sql("SELECT comments.*, users.first_name, users.last_name FROM comments, users WHERE comments.post_id = #{pp.id} AND comments.user_id = users.id")
+		end
 		@post = Post.new
+		@comment = Comment.new
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @page }

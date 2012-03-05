@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 	has_many :groups, :dependent => :destroy
 	has_many :group_members, :dependent => :destroy
 	has_many :posts, :dependent => :destroy
+	has_many :comments, :dependent => :destroy
 
 	# Validations
 	validates :first_name, :presence => true
@@ -28,7 +29,7 @@ class User < ActiveRecord::Base
 	def before_destroy
 		@pages = Page.where(:category => 'user', :owner => id)
 		@pages.each do |p|
-			p.destory
+			p.destroy
 		end
 	end
 
