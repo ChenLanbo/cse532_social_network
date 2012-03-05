@@ -41,9 +41,9 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(params[:post])
-		puts "+++++++++++++++++ " + @post.page_id.to_s
+		# puts "+++++++++++++++++ " + @post.page_id.to_s
 		@post.user_id = session[:user_id]
-
+		@comment = Comment.new
     respond_to do |format|
       if @post.save
 
