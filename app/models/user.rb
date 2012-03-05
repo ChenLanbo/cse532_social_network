@@ -25,6 +25,13 @@ class User < ActiveRecord::Base
 	attr_reader :password
 	validate :password_must_be_present
 
+	def before_destroy
+		@pages = Page.where(:category => 'user', :owner => id)
+		@pages.each do |p|
+			p.destory
+		end
+	end
+
 	def password=(password)
 		@password = password
 		if password.present?

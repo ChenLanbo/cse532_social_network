@@ -43,6 +43,8 @@ class GroupsController < ApplicationController
 		@group.user_id = session[:user_id]
     respond_to do |format|
       if @group.save
+
+				@page = Page.create(:owner => @group.id, :category => 'group')
         format.html { redirect_to @group, :notice => 'Group was successfully created.' }
         format.json { render :json => @group, :status => :created, :location => @group }
       else
@@ -72,6 +74,10 @@ class GroupsController < ApplicationController
   # DELETE /groups/1.json
   def destroy
     @group = Group.find(params[:id])
+		@pages = Page.where(:category => 'group', :owner => @group.id)
+		@pages.each do |p|
+			p.destroy
+		end
     @group.destroy
 
     respond_to do |format|
