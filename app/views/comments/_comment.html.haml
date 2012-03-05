@@ -1,4 +1,6 @@
 .aComment
-	%p= comment.content
-	%p= comment.updated_at
-	%p= comment.first_name + " " + comment.last_name
+	%p.comment
+		= comment.first_name + " " + comment.last_name
+		\:
+		= comment.content
+	%p.time= comment.updated_at.localtime.to_s

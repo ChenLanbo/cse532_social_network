@@ -1,7 +1,9 @@
-.aFeed
-	%p= post.content
-	%p= post.updated_at
-	%p= "Posted by " + post.first_name + " " + post.last_name
+.aPost
+	%p.post
+		= post.first_name + " " + post.last_name
+		\:
+		= post.content
+	%p.time= post.updated_at.localtime
 
 	.newComment
 		= form_for(@comment, :remote => true) do |ff|
@@ -11,4 +13,6 @@
 			.actions
 				= ff.submit 'Comment'
 	.commentList
-		= render post.comments
+		- if post.comments.length > 0
+			%p.post Comments
+			= render post.comments

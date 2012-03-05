@@ -13,9 +13,9 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @group = Group.find(params[:id])
-
+		@page = Page.find_by_sql("SELECT * FROM pages WHERE category = 'group' AND owner = #{@group.id}")[0]
     respond_to do |format|
-      format.html # show.html.erb
+			format.html { redirect_to "/pages/#{@page.id}" }
       format.json { render :json => @group }
     end
   end
