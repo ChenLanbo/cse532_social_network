@@ -45,7 +45,7 @@ class GroupsController < ApplicationController
       if @group.save
 
 				@page = Page.create(:owner => @group.id, :category => 'group')
-        format.html { redirect_to @group, :notice => 'Group was successfully created.' }
+        format.html { redirect_to groups_url, :notice => 'Group was successfully created.' }
         format.json { render :json => @group, :status => :created, :location => @group }
       else
         format.html { render :action => "new" }

@@ -26,6 +26,9 @@
 	<% if session[:user_id] %>
 		<div id="leftBar">
 			<div>
+				<%= link_to "Home", "/pages/#{session[:page_id]}" %>
+			</div>
+			<div>
 				<%= link_to "Friends", :controller => :friends, :action => :index %>
 			</div>
 			<div>
