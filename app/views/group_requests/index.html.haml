@@ -1,6 +1,10 @@
-.groupRequestHeader
-	%h2 Group Requests
+= render 'layouts/header'
+= render 'layouts/left_bar'
 
-.groupRequestList
-	= render @group_requests
+#mainBar
+	.groupRequestHeader
+		%h2 Group Requests
+
+	.groupRequestList
+		= render @group_requests
 

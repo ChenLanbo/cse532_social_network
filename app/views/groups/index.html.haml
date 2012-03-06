@@ -1,8 +1,12 @@
-.groupHeader
-	%h2 Groups
-	= link_to 'Create Group', '/groups/new'
-	\|
-	= link_to 'Find Group', '/groupsearch'
+= render 'layouts/header'
+= render 'layouts/left_bar'
 
-.groupList
-	= render @groups
+#mainBar
+	.groupHeader
+		%h2 Groups
+		= link_to 'Create Group', '/groups/new'
+		\|
+		= link_to 'Find Group', '/groupsearch'
+
+	.groupList
+		= render @groups

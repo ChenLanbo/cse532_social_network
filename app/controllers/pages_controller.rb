@@ -23,6 +23,12 @@ class PagesController < ApplicationController
 		@post = Post.new
 		@comment = Comment.new
 
+		if @page.category == 'group'
+			@group_members = GroupMember.find_by_sql("SELECT group_members.*, users.first_name, users.last_name FROM group_members, users WHERE group_members.group_id = #{@page.owner} AND group_members.user_id = users.id")
+		elsif @page.category == 'user'
+		else
+		end
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @page }

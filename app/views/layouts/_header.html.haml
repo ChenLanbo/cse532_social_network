@@ -1,0 +1,12 @@
+#header
+	#navigationBar
+		- if session[:user_id]
+			= session[:first_name] + " " + session[:last_name]
+			= link_to "Friends", :controller => :friends, :action => :index
+			= link_to "Requests", :controller => :friend_requests, :action => :index
+			= link_to "Find Friends", :controller => :users, :action => :index
+			= link_to "Logout", :controller => :sessions, :action => :destroy
+		- else
+			= link_to "Login", :controller => :sessions, :action => :new
+			= link_to "Signup", :controller => :users, :action => :new
+

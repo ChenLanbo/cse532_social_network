@@ -8,44 +8,8 @@
 </head>
 <body>
 
-<div id="header">
-	<div id="navigationBar">
-		<% if session[:user_id] %>
-			<%= session[:first_name] + " " + session[:last_name] %>
-			<%= link_to "Friends", :controller => :friends, :action => :index %>
-			<%= link_to "Requests", :controller => :friend_requests, :action => :index %>
-			<%= link_to "Find Friends", :controller => :users, :action => :index %>
-			<%= link_to "Logout", :controller => :sessions, :action => :destroy %>
-		<% else %>
-			<%= link_to "Login", :controller => :sessions, :action => :new %>
-			<%= link_to "Signup", :controller => :users, :action => :new %>
-		<% end %>
-	</div>
-</div>
-
 <div id="main">
-	<% if session[:user_id] %>
-		<div id="leftBar">
-			<div>
-				<%= link_to "Home", "/pages/#{session[:page_id]}" %>
-			</div>
-			<div>
-				<%= link_to "Friends", :controller => :friends, :action => :index %>
-			</div>
-			<div>
-				<%= link_to "Circles", :controller => :circles, :action => :index %>
-			</div>
-			<div>
-				<%= link_to "Groups", :controller => :groups, :action => :index %>
-			</div>
-		</div>
-	<% end %>
-
-	<div id="mainBar">
 		<%= yield %>
-	</div>
-	<div id="rightBar">
-	</div>
 </div>
 
 </body>

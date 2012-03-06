@@ -1,7 +1,11 @@
-.postForm
-	= render 'posts/form'
-.newsFeedHeader
-	%p
-		%b News Feed
-.newsFeed
-	= render @posts
+= render 'layouts/header'
+= render 'layouts/left_bar'
+
+#mainBar
+	.postForm
+		= render 'posts/form'
+	.newsFeedHeader
+		%p
+			%b News Feed
+	.newsFeed
+		= render @posts

@@ -1,6 +1,10 @@
-.friendHeader
-	%h2 All Friends
+= render 'layouts/header'
+= render 'layouts/left_bar'
 
-.friendList
-	= render @friends
+#mainBar
+	.friendHeader
+		%h2 All Friends
+
+	.friendList
+		= render @friends
 

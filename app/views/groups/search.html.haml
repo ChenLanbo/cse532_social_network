@@ -1,3 +1,7 @@
-.groupSearchHeader
-	%h3 Groups you may have interest
-= render @groups
+= render 'layouts/header'
+= render 'layouts/left_bar'
+
+#mainBar
+	.groupSearchHeader
+		%h3 Groups you may have interest
+	= render @groups

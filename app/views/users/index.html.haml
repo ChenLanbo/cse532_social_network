@@ -1,7 +1,10 @@
+= render 'layouts/header'
+= render 'layouts/left_bar'
 
-- if @users.length > 0
-	%h2 People you may know
-	.userList
-		= render @users
-- else
-	%h2 No suggestion
+#mainBar
+	- if @users.length > 0
+		%h2 People you may know
+		.userList
+			= render @users
+	- else
+		%h2 No suggestion

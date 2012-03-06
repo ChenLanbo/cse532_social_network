@@ -1,9 +1,13 @@
-.friendRequestHeader
-	%h2 Friend Requests
+= render 'layouts/header'
+= render 'layouts/left_bar'
 
-.friendRequestList
-	- if @friend_requests.length == 0
-		%p No new requests
-	- else
-		= render @friend_requests
+#mainBar
+	.friendRequestHeader
+		%h2 Friend Requests
+
+	.friendRequestList
+		- if @friend_requests.length == 0
+			%p No new requests
+		- else
+			= render @friend_requests
 

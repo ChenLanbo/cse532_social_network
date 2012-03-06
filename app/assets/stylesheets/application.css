@@ -38,6 +38,7 @@ textarea {
 #mainBar {
 	margin: 15px;
 	float: left;
+	width: 500px;
 }
 
 #rightBar {
