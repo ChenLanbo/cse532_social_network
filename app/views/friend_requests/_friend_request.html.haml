@@ -1,0 +1,4 @@
+.aFriendRequest
+	%b= friend_request.first_name + " " + friend_request.last_name
+	= link_to 'Accept', friend_request, :method => :put, :remote => true
+	= link_to 'Ignore', friend_request, :confirm => 'Are you sure?', :method => :delete, :remote => true

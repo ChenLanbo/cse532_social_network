@@ -1,15 +1,9 @@
-%h2 Friend Requests
+.friendRequestHeader
+	%h2 Friend Requests
 
-- if @friend_requests.length == 0
-	%p No new requests
-- else
-	%table
-		- @friend_requests.each do |friend_request|
-			%tr
-				%td= friend_request.first_name + " " + friend_request.last_name
-				%td
-					= form_for friend_request do |f|
-						= f.submit 'Accept'
-				%td= link_to 'Destroy', friend_request, :confirm => 'Are you sure?', :method => :delete
-	%br
+.friendRequestList
+	- if @friend_requests.length == 0
+		%p No new requests
+	- else
+		= render @friend_requests
 

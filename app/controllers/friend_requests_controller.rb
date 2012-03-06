@@ -72,6 +72,7 @@ class FriendRequestsController < ApplicationController
 				tmp[0].destroy if tmp.length > 0
 
         format.html { redirect_to friend_requests_url, :notice => 'Friend request was successfully updated.' }
+				format.js
         format.json { head :ok }
       else
         format.html { render :action => "edit" }
@@ -88,6 +89,7 @@ class FriendRequestsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to friend_requests_url }
+			format.js
       format.json { head :ok }
     end
   end
