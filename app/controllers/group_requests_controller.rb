@@ -68,15 +68,13 @@ class GroupRequestsController < ApplicationController
   def update
     @group_request = GroupRequest.find(params[:id])
 
-    respond_to do |format|
-      if @group_request.update_attributes(params[:group_request])
-        format.html { redirect_to @group_request, :notice => 'Group request was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.json { render :json => @group_request.errors, :status => :unprocessable_entity }
-      end
-    end
+		respond_to do |format|
+			@group_member = GroupMember.create(:group_id => @group_request.group_id, :user_id => @group_request.user_id)
+			@group_request.destroy
+			format.html { redirect_to "/group_requests?group_id=#{@group_member.group_id}"}
+			format.js
+		end
+
   end
 
   # DELETE /group_requests/1

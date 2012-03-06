@@ -1,3 +1,4 @@
 .aGroupRequest
 	%b= group_request.first_name + " " + group_request.last_name
+	= link_to 'Accept', group_request, :method => :put, :remote => true
 	= link_to 'Ignore', group_request, :confirm => 'Are you sure?', :method => :delete, :remote => true
