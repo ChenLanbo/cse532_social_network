@@ -7,6 +7,8 @@ class SessionsController < ApplicationController
 		if user = User.authenticate(params[:email], params[:password])
 			# puts "------------ " + user.id.to_s
 			session[:user_id] = user.id
+			session[:first_name] = user.first_name
+			session[:last_name] = user.last_name
 			# page = Page.where("category = 'user' and owner = #{user.id}")
 			page = Page.find_by_sql("SELECT * FROM pages where category = 'user' and owner = #{user.id} LIMIT 1")[0]
 			session[:page_id] = page.id

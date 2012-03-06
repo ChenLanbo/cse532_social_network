@@ -11,6 +11,7 @@
 <div id="header">
 	<div id="navigationBar">
 		<% if session[:user_id] %>
+			<%= session[:first_name] + " " + session[:last_name] %>
 			<%= link_to "Friends", :controller => :friends, :action => :index %>
 			<%= link_to "Requests", :controller => :friend_requests, :action => :index %>
 			<%= link_to "Find Friends", :controller => :users, :action => :index %>

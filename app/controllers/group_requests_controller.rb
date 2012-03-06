@@ -2,7 +2,12 @@ class GroupRequestsController < ApplicationController
   # GET /group_requests
   # GET /group_requests.json
   def index
-    @group_requests = GroupRequest.all
+
+		if params[:group_id] == nil
+    	@group_requests = []
+		else
+			@group_requests = GroupRequest.find_by_sql("SELECT group_requests.*, users.first_name, users.last_name FROM group_requests, users WHERE group_requests.group_id = #{params[:group_id]} AND group_requests.user_id = users.id")
+		end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -40,7 +45,10 @@ class GroupRequestsController < ApplicationController
   # POST /group_requests
   # POST /group_requests.json
   def create
-    @group_request = GroupRequest.new(params[:group_request])
+    @group_request = GroupRequest.new(:group_id => params[:group_id], :user_id => session[:user_id])
+
+		puts params[:group_id]
+		puts params[:user_id]
 
     respond_to do |format|
       if @group_request.save

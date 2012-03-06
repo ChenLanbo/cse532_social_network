@@ -41,7 +41,7 @@ class FriendRequestsController < ApplicationController
   # POST /friend_requests
   # POST /friend_requests.json
   def create
-		@friend_request = FriendRequest.new()
+		@friend_request = FriendRequest.new
 		@friend_request.user_id = params[:requester_id]
 		@friend_request.requester_id = session[:user_id]
 
