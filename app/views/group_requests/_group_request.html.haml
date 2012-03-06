@@ -1,2 +1,3 @@
 .aGroupRequest
-	%p= group_request.first_name + " " + group_request.last_name
+	%b= group_request.first_name + " " + group_request.last_name
+	= link_to 'Ignore', group_request, :confirm => 'Are you sure?', :method => :delete, :remote => true
