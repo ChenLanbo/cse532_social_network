@@ -7,12 +7,16 @@
 */
 
 body {
-	margin-left:125px;
-	margin-right:125px;
+	margin-left: 200px;
+	margin-right: 200px;
 }
 
 a {
 		text-decoration: none;
+}
+
+textarea {
+	resize: vertical;
 }
 
 #header {
@@ -32,7 +36,7 @@ a {
 }
 
 #mainBar {
-	margin: 10px;
+	margin: 15px;
 	float: left;
 }
 

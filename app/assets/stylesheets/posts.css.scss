@@ -2,14 +2,32 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.postForm {
+	padding: 5px;
+	background-color: #F3FAFF;
+}
+
 .aPost {
 	border-bottom: 1px solid #E6EFF7;
 }
 
+.newsFeedHeader {
+	height: 40px;
+	padding: 2px;
+	border-bottom: 1px solid #E6EFF7;
+}
+
+.newsFeed {
+	margin-top: 2px;
+}
+
 .post {
 	font-size: 14px;
+	line-height: 50%;
 }
 
 .time {
+	padding: 3px;
 	font-size: 9px;
+	line-height: 20%;
 }

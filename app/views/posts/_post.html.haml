@@ -1,18 +1,18 @@
 .aPost
 	%p.post
-		= post.first_name + " " + post.last_name
+		%b= post.first_name + " " + post.last_name
 		\:
 		= post.content
 	%p.time= post.updated_at.localtime
 
+	.commentList
+		- if post.comments.length > 0
+			= render post.comments
+
 	.newComment
 		= form_for(@comment, :remote => true) do |ff|
 			= hidden_field_tag :post_id, post.id
-			.field
-				= ff.text_area :content, :cols => 50, :rows => 2
-			.actions
-				= ff.submit 'Comment'
-	.commentList
-		- if post.comments.length > 0
-			%p.post Comments
-			= render post.comments
+			= ff.text_area :content, :cols => 50, :rows => 2
+			%br
+			= ff.submit 'Comment'
+
