@@ -85,6 +85,7 @@ class FriendsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to friends_url }
+			format.js
       format.json { head :ok }
     end
   end

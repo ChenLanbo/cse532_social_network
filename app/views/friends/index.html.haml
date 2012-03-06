@@ -1,10 +1,6 @@
-%h2 All Friends
+.friendHeader
+	%h2 All Friends
 
-%table
-	- @friends.each do |friend|
-		%tr
-			%td
-				= link_to friend.first_name + " " + friend.last_name, "/pages/#{friend.page.id}"
-			%td= link_to 'Unfriend', friend, :confirm => 'Are you sure?', :method => :delete
-%br
+.friendList
+	= render @friends
 

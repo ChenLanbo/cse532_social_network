@@ -1,2 +1,4 @@
-%p= friend.first_name + " " + friend.last_name
+.aFriend
+	%b= friend.first_name + " " + friend.last_name
+	= link_to 'Unfriend', friend, :confirm => 'Are you sure?', :method => :delete, :remote => true
 
