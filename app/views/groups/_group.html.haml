@@ -1,5 +1,5 @@
 .aGroup
-	= link_to group.name, group
+	%b= link_to group.name, group
 	- if group.user_id == session[:user_id]
 		= link_to 'Rename', edit_group_path(group)
 		= link_to 'Destory', group, :confirm => 'Are you sure?', :method => :delete
