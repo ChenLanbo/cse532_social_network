@@ -47,6 +47,7 @@ class FriendRequestsController < ApplicationController
 
     respond_to do |format|
       if @friend_request.save
+				# format.html { redirect_to users_path, :notice => 'Friend request was successfully sent.' }
 				format.html { redirect_to users_path, :notice => 'Friend request was successfully sent.' }
         format.json { render :json => @friend_request, :status => :created, :location => @friend_request }
       else

@@ -45,19 +45,21 @@ class GroupRequestsController < ApplicationController
   # POST /group_requests
   # POST /group_requests.json
   def create
-    @group_request = GroupRequest.new(:group_id => params[:group_id], :user_id => session[:user_id])
-
-		puts params[:group_id]
-		puts params[:user_id]
 
     respond_to do |format|
-      if @group_request.save
-        format.html { redirect_to @group_request, :notice => 'Group request was successfully created.' }
-        format.json { render :json => @group_request, :status => :created, :location => @group_request }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @group_request.errors, :status => :unprocessable_entity }
-      end
+			if GroupRequest.where("group_id = #{params[:group_id]} and user_id = #{session[:user_id]}").length == 0
+				@group_request = GroupRequest.new(:group_id => params[:group_id], :user_id => session[:user_id])
+      	if @group_request.save
+        	format.html { redirect_to '/groupsearch', :notice => 'Group request was successfully created.' }
+					format.js
+        	format.json { render :json => @group_request, :status => :created, :location => @group_request }
+      	else
+        	format.html { redirect_to '/groupsearch' } 
+					format.json { render :json => @group_request.errors, :status => :unprocessable_entity }
+      	end
+			else
+				format.html { redirect_to '/groupsearch'}
+			end
     end
   end
 
