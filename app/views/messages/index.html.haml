@@ -1,23 +1,9 @@
-%h1 Listing messages
+= render 'layouts/header'
+= render 'layouts/left_bar'
 
-%table
-  %tr
-    %th User
-    %th Subject
-    %th Content
-    %th
-    %th
-    %th
-
-  - @messages.each do |message|
-    %tr
-      %td= message.user_id
-      %td= message.subject
-      %td= message.content
-      %td= link_to 'Show', message
-      %td= link_to 'Edit', edit_message_path(message)
-      %td= link_to 'Destroy', message, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Message', new_message_path
+#mainBar
+	.messageTab
+		%ul
+			%li= link_to 'New Message', new_message_path, :remote => true
+			%li= link_to 'Inbox', messages_url, :remote => true
+	.messageMain

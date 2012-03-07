@@ -19,6 +19,10 @@ textarea {
 	resize: vertical;
 }
 
+ul {
+	list-style: none;
+}
+
 #header {
 	height: 75px;
 }
@@ -30,7 +34,7 @@ textarea {
 	width: 150px;
 	border: 1px solid #B8D4E8;
 	background-color: #F0F5F8;
-	padding:15px;
+	padding: 15px;
 	position: relative;
 	float: left;
 }

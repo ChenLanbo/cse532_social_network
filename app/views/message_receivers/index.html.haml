@@ -1,0 +1,21 @@
+%h1 Listing message_receivers
+
+%table
+  %tr
+    %th Message
+    %th User
+    %th
+    %th
+    %th
+
+  - @message_receivers.each do |message_receiver|
+    %tr
+      %td= message_receiver.message_id
+      %td= message_receiver.user_id
+      %td= link_to 'Show', message_receiver
+      %td= link_to 'Edit', edit_message_receiver_path(message_receiver)
+      %td= link_to 'Destroy', message_receiver, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Message receiver', new_message_receiver_path

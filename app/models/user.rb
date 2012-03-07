@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 	has_many :group_requests, :dependent => :destroy
 	has_many :posts, :dependent => :destroy
 	has_many :comments, :dependent => :destroy
+	has_many :messages, :dependent => :destroy
 
 	# Validations
 	validates :first_name, :presence => true

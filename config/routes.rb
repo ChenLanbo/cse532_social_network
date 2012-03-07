@@ -1,5 +1,7 @@
 Cse532SocialNetwork::Application.routes.draw do
 
+  resources :message_receivers
+
   resources :messages
 
   resources :group_requests

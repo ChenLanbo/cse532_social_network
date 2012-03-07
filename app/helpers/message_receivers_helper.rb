@@ -1,0 +1,2 @@
+module MessageReceiversHelper
+end

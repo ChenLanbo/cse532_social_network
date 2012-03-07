@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Message:
+  = @message_receiver.message_id
+%p
+  %b User:
+  = @message_receiver.user_id
+
+= link_to 'Edit', edit_message_receiver_path(@message_receiver)
+\|
+= link_to 'Back', message_receivers_path
