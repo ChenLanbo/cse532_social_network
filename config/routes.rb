@@ -1,5 +1,7 @@
 Cse532SocialNetwork::Application.routes.draw do
 
+  resources :messages
+
   resources :group_requests
 
   resources :comments
