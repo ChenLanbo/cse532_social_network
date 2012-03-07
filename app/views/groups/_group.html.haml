@@ -7,7 +7,4 @@
 		\|
 		= link_to 'Destory', group, :confirm => 'Are you sure?', :method => :delete
 	- else
-		%b= group.name
-		= form_for(@group_request, :remote => true) do |form|
-			= hidden_field_tag :group_id, group.id
-			= form.submit 'Join'
+		%b= link_to group.name, group

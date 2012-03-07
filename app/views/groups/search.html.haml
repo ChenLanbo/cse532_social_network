@@ -4,4 +4,8 @@
 #mainBar
 	.groupSearchHeader
 		%h3 Groups you may have interest
-	= render @groups
+	- @groups.each do |g|
+		%b= g.name
+		= form_for(@group_request, :remote => true) do |form|
+			= hidden_field_tag :group_id, g.id
+			= form.submit 'Join'

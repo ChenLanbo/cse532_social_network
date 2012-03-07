@@ -3,6 +3,8 @@ class GroupsController < ApplicationController
   # GET /groups.json
   def index
     @groups = Group.find_by_sql("SELECT * from groups WHERE user_id = #{session[:user_id]} or id in (SELECT group_id FROM group_members WHERE user_id = #{session[:user_id]})")
+		# Bug here
+		@group_request = GroupRequest.new
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @groups }
