@@ -9,3 +9,11 @@
 			%b News Feed
 	.newsFeed
 		= render @posts
+
+#rightBar
+	- if @page.category == 'group'
+		.groupMemberList
+			%h3 Members
+			= render @group_members
+	- else
+		
