@@ -4,6 +4,11 @@
 
 .messageTab {
 	border-bottom: 1px solid #B8D4E8;
+	height: 20px;
+}
+
+.messageTab li {
+	display: inline;
 }
 
 .messageMain {

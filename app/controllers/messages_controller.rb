@@ -2,10 +2,11 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    @messages = Message.find_by_sql("SELECT messages.*, users.first_name, users.last_name FROM messages, message_receivers, users WHERE messages.id = message_receivers.message_id AND message_receivers.user_id = #{session[:user_id]} AND users.id = messages.user_id")
 
     respond_to do |format|
       format.html # index.html.erb
+			format.js
       format.json { render :json => @messages }
     end
   end
@@ -42,10 +43,18 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(params[:message])
+		@message.user_id = session[:user_id]
+
+		puts session[:receivers]
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, :notice => 'Message was successfully created.' }
+
+				session[:receivers].each do |r|
+					MessageReceiver.create(:message_id => @message.id, :user_id => r)
+				end
+
+        format.html { redirect_to messages_url, :notice => 'Message was successfully created.' }
         format.json { render :json => @message, :status => :created, :location => @message }
       else
         format.html { render :action => "new" }
@@ -81,4 +90,5 @@ class MessagesController < ApplicationController
       format.json { head :ok }
     end
   end
+
 end

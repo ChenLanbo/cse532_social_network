@@ -5,5 +5,7 @@
 	.messageTab
 		%ul
 			%li= link_to 'New Message', new_message_path, :remote => true
+			\|
 			%li= link_to 'Inbox', messages_url, :remote => true
 	.messageMain
+		= render @messages

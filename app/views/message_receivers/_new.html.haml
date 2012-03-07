@@ -1,0 +1,4 @@
+- @friends.each do |f|
+	.addReceiver
+		%b= f.first_name + " " + f.last_name
+		= link_to 'Add', "/message_receivers?fu=#{f.fu_id}&name=#{f.first_name + " " + f.last_name}", :method => :post, :remote => true

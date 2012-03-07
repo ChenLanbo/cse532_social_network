@@ -1,0 +1,5 @@
+$(".receiverList1").append("<%= escape_javascript(render 'create') %>");
+$(".addReceiver").bind('ajax:success', function() {
+		$(this).fadeOut();
+});
+
