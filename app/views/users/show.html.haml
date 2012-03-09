@@ -2,6 +2,8 @@
 = render 'layouts/left_bar'
 
 #mainBar
+	.userProfileHeader
+		%h3 Profile
 	.userProfile
 		%p
 			%b= @user.first_name + " " + @user.last_name
@@ -16,4 +18,5 @@
 			%p
 				%b Address:
 				= @user.address
-	= link_to 'Edit your profile', edit_user_path(@user)
+	- if @user.id == session[:user_id]
+		= link_to 'Edit your profile', edit_user_path(@user)

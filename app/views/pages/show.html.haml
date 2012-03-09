@@ -17,4 +17,4 @@
 		%h4 Members
 		= render @group_members
 	- else
-		= @user.first_name + " " + @user.last_name
+		= link_to @user.first_name + " " + @user.last_name, "/users/#{@user.id}"
