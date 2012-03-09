@@ -1,4 +1,5 @@
 class AdvertisementsController < ApplicationController
+	skip_before_filter :authorize
   # GET /advertisements
   # GET /advertisements.json
   def index
