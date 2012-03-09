@@ -1,0 +1,6 @@
+.aMessage
+	%p= 'Subject: ' + @message.subject
+	%p= 'From: ' + @message.first_name + " " + @message.last_name
+	%p= @message.content
+
+	= link_to 'Back', '/messages'

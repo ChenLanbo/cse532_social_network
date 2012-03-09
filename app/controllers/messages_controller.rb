@@ -14,10 +14,11 @@ class MessagesController < ApplicationController
   # GET /messages/1
   # GET /messages/1.json
   def show
-    @message = Message.find(params[:id])
+    @message = Message.find_by_sql("SELECT messages.*, users.first_name, users.last_name FROM messages, message_receivers, users WHERE messages.id = #{params[:id]} AND messages.id = message_receivers.message_id AND message_receivers.user_id = #{session[:user_id]} AND users.id = messages.user_id")[0]
 
     respond_to do |format|
       format.html # show.html.erb
+			format.js
       format.json { render :json => @message }
     end
   end

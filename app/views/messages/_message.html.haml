@@ -1,3 +1,4 @@
 .aMessage
-	%p= message.subject
+	%p= 'Subject: ' + message.subject
 	%p= 'From: ' + message.first_name + " " + message.last_name
+	%p= link_to 'Show', message, :method => :get, :remote => true

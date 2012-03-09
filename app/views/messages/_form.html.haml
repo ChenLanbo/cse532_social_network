@@ -6,11 +6,12 @@
 	= submit_tag 'Add Receiver'
 .receiverList2
 
-= form_for @message do |f|
-	.field
-		= f.label :subject
-		= f.text_field :subject
-	.field
-		= f.text_area :content
-	.actions
-		= f.submit 'Save'
+.messageNew
+	= form_for @message do |f|
+		.field
+			= f.label :subject
+			= f.text_field :subject
+		.field
+			= f.text_area :content
+		.actions
+			= f.submit 'Save'
