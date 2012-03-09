@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Type:
+  = @advertisement.type
+%p
+  %b Company:
+  = @advertisement.company
+%p
+  %b Item name:
+  = @advertisement.item_name
+%p
+  %b Unit price:
+  = @advertisement.unit_price
+%p
+  %b Quantity:
+  = @advertisement.quantity
+
+= link_to 'Edit', edit_advertisement_path(@advertisement)
+\|
+= link_to 'Back', advertisements_path
