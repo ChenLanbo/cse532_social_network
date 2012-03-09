@@ -35,6 +35,9 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
     @post = Post.find(params[:id])
+		respond_to do |format|
+			format.html
+		end
   end
 
   # POST /posts
@@ -87,8 +90,7 @@ class PostsController < ApplicationController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to posts_url }
-      format.json { head :ok }
+			format.js
     end
   end
 end

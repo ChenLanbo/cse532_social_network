@@ -4,7 +4,7 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
  *= require_tree . 
-*/
+ */
 
 body {
 	margin-left: 200px;
@@ -25,7 +25,30 @@ ul {
 
 #header {
 	height: 75px;
+	background-color: #0067A0;
+	margin-bottom: 4px;
+	color: white;
 }
+
+#navigationBar {
+	padding-top: 20px;
+	padding-right: 5px;
+}
+
+#navigationBar ul{
+	display: inline;
+	float: right;
+}
+
+#navigationBar li {
+	display: inline;
+}
+
+#navigationBar a{
+	display: inline;
+	color: white;
+}
+
 
 #main {
 }
@@ -46,5 +69,6 @@ ul {
 }
 
 #rightBar {
+	padding: 15px;
 }
 

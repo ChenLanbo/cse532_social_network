@@ -2,7 +2,7 @@ class FriendsController < ApplicationController
   # GET /friends
   # GET /friends.json
   def index
-		@friends = Friend.find_by_sql("SELECT friends.*, users.first_name, users.last_name FROM friends, users WHERE friends.user_id = #{session[:user_id]} AND friends.fu_id = users.id");
+		@friends = Friend.find_by_sql("SELECT friends.*, users.first_name, users.last_name, pages.id AS page_id FROM friends, users, pages WHERE friends.user_id = #{session[:user_id]} AND friends.fu_id = users.id AND pages.category = 'user' AND pages.owner = users.id");
 
 		@friends.each do |f|
 			f.instance_eval("def page; @page; end")

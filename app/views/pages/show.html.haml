@@ -12,8 +12,9 @@
 
 #rightBar
 	- if @page.category == 'group'
-		.groupMemberList
-			%h3 Members
-			= render @group_members
+		%h4= @group.name
+		%h4= @user.first_name + " " + @user.last_name
+		%h4 Members
+		= render @group_members
 	- else
-		
+		= @user.first_name + " " + @user.last_name

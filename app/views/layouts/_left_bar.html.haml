@@ -2,6 +2,8 @@
 	%div
 		= link_to "Home", "/pages/#{session[:page_id]}"
 	%div
+		= link_to "Profile", "/users/#{session[:user_id]}"
+	%div
 		= link_to "Friends", :controller => :friends, :action => :index
 	%div
 		= link_to "Circles", :controller => :circles, :action => :index

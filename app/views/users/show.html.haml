@@ -1,36 +1,19 @@
-%p#notice= notice
+= render 'layouts/header'
+= render 'layouts/left_bar'
 
-%p
-  %b First name:
-  = @user.first_name
-%p
-  %b Last name:
-  = @user.last_name
-%p
-  %b Email:
-  = @user.email
-%p
-  %b Hashed password:
-  = @user.hashed_password
-%p
-  %b Salt:
-  = @user.salt
-%p
-  %b Day of birth:
-  = @user.day_of_birth
-%p
-  %b Month of birth:
-  = @user.month_of_birth
-%p
-  %b Year of birth:
-  = @user.year_of_birth
-%p
-  %b Gender:
-  = @user.gender
-%p
-  %b Address:
-  = @user.address
-
-= link_to 'Edit', edit_user_path(@user)
-\|
-= link_to 'Back', users_path
+#mainBar
+	.userProfile
+		%p
+			%b= @user.first_name + " " + @user.last_name
+		%p
+			%b Email:
+			= @user.email
+		- if @user.month_of_birth != nil
+			%p
+				%b Birthday:
+				= @user.month_of_birth.to_s + "/" + @user.day_of_birth.to_s + "/" + @user.year_of_birth.to_s
+		- if @user.address != nil
+			%p
+				%b Address:
+				= @user.address
+	= link_to 'Edit your profile', edit_user_path(@user)

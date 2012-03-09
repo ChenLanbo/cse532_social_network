@@ -1,4 +1,5 @@
 .aFriend
-	%b= friend.first_name + " " + friend.last_name
+	%b
+		= link_to friend.first_name + " " + friend.last_name, "/pages/#{friend.page_id}"
 	= link_to 'Unfriend', friend, :confirm => 'Are you sure?', :method => :delete, :remote => true
 

@@ -1,9 +1,14 @@
 .aPost
-	%p.post
-		%b= post.first_name + " " + post.last_name
-		\:
-		= post.content
-	%p.time= post.updated_at.localtime
+	.postUser
+		%p
+			%b= post.first_name + " " + post.last_name
+	.postConent
+		%p= post.content
+		.postEdit
+			= post.updated_at.localtime
+			- if post.user_id == session[:user_id]
+				= link_to 'Delete', post, :method => :delete, :remote => true
+				= link_to 'Edit', "/posts/#{post.id}/edit"
 
 	.commentList
 		- if post.comments.length > 0

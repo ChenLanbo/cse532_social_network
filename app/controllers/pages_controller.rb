@@ -15,17 +15,23 @@ class PagesController < ApplicationController
   def show
     @page = Page.find(params[:id])
 		@posts = Post.find_by_sql("SELECT posts.*, users.first_name, users.last_name FROM posts, users WHERE posts.page_id = #{@page.id} AND posts.user_id = users.id ORDER BY updated_at DESC")
+
+		# Get comments
 		@posts.each do |pp|
 			pp.instance_eval("def comments; @comments; end")
 			pp.instance_eval("def comments=(value); @comments = value; end")
 			pp.comments = Comment.find_by_sql("SELECT comments.*, users.first_name, users.last_name FROM comments, users WHERE comments.post_id = #{pp.id} AND comments.user_id = users.id")
 		end
+
 		@post = Post.new
 		@comment = Comment.new
 
 		if @page.category == 'group'
+			@group = Group.find_by_id(@page.owner)
+			@user = User.find_by_id(@group.user_id)
 			@group_members = GroupMember.find_by_sql("SELECT group_members.*, users.first_name, users.last_name FROM group_members, users WHERE group_members.group_id = #{@page.owner} AND group_members.user_id = users.id")
 		elsif @page.category == 'user'
+			@user = User.find_by_id(@page.owner)
 		else
 		end
 
