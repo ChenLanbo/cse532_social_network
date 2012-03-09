@@ -1,5 +1,7 @@
 Cse532SocialNetwork::Application.routes.draw do
 
+  resources :sales
+
   resources :advertisements
 
   resources :message_receivers

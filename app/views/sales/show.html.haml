@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Advertisement:
+  = @sale.advertisement_id
+%p
+  %b User:
+  = @sale.user_id
+%p
+  %b Quantity:
+  = @sale.quantity
+
+= link_to 'Edit', edit_sale_path(@sale)
+\|
+= link_to 'Back', sales_path
