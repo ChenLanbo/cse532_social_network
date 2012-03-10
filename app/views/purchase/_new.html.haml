@@ -1,0 +1,13 @@
+.newPurchase
+	%h3 Buy
+	%p= @advertisement.item_name
+	%p
+		Price:
+		= @advertisement.unit_price
+	= form_tag('/purchase/create') do
+		= hidden_field_tag :ad_id, @advertisement.id
+		= hidden_field_tag :user_id, session[:user_id]
+		= label_tag :number
+		= number_field_tag :quantity, 1, :in => 1..@advertisement.quantity
+		= submit_tag 'Make a purchase'
+

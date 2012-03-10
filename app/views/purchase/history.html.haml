@@ -1,0 +1,23 @@
+= render 'layouts/header'
+= render 'layouts/left_bar'
+
+#mainBar
+	.purchaseHeader
+		%h3 Shopping
+		%ul
+			%li= link_to 'Purchase', '/purchase/index'
+			%li= link_to 'History', '/purchase/history'
+
+	.purchaseMain
+		.saleList
+			- @sales.each do |s|
+				.aSale
+					%ul
+						%li= 'Transaction: ' + s.id.to_s
+						%li= 'Product: ' + s.item_name + " - " + s.company
+						%li= 'Unit Price: ' + s.unit_price.to_s
+						%li= 'Quantity: ' + s.quantity.to_s
+						%li= 'Total: ' + (s.unit_price * s.quantity).to_s
+						%li= 'Time: ' + s.updated_at.localtime.to_s
+
+#rightBar

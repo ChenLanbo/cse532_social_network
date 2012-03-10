@@ -1,5 +1,10 @@
 Cse532SocialNetwork::Application.routes.draw do
 
+  get "purchase/index"
+  get "purchase/history"
+  get "purchase/new"
+  post "purchase/create"
+
   get "/management/new"
   post "/management/create"
   get "/management/destroy"

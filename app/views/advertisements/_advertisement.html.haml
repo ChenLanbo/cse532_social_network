@@ -13,9 +13,12 @@
 			Price:
 			= advertisement.unit_price
 		%li
-			Quantity:
+			Remaining:
 			= advertisement.quantity
 		%li
-			= link_to 'Show', advertisement
-			= link_to 'Edit', edit_advertisement_path(advertisement)
-			= link_to 'Delete', advertisement, :confirm => 'Are you sure?', :method => :delete, :remote => true
+			- if session[:manager_id]
+				= link_to 'Show', advertisement
+				= link_to 'Edit', edit_advertisement_path(advertisement)
+				= link_to 'Delete', advertisement, :confirm => 'Are you sure?', :method => :delete, :remote => true
+			- elsif session[:user_id]
+				= link_to 'Buy', "/purchase/new?ad=#{advertisement.id}", :remote => true

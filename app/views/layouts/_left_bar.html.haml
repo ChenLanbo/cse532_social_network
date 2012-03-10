@@ -12,6 +12,8 @@
 			= link_to "Groups", :controller => :groups, :action => :index
 		%div
 			= link_to "Message", :controller => :messages, :action => :index
+		%div
+			= link_to "Purchase", :controller => :purchase, :action => :index
 	- elsif session[:manager_id]
 		%div
 			= link_to "Ads", '/advertisements', :remote => true

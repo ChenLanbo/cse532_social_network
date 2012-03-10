@@ -1,0 +1,15 @@
+= render 'layouts/header'
+= render 'layouts/left_bar'
+
+#mainBar
+	.purchaseHeader
+		%h3 Shopping
+		%ul
+			%li= link_to 'Purchase', '/purchase/index'
+			%li= link_to 'History', '/purchase/history'
+
+	.purchaseMain
+		.adList
+			= render @advertisements
+
+#rightBar
