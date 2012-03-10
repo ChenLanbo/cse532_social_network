@@ -1,4 +1,5 @@
 class SalesController < ApplicationController
+	skip_before_filter :authorize
   # GET /sales
   # GET /sales.json
   def index
@@ -6,6 +7,7 @@ class SalesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
+			format.js
       format.json { render :json => @sales }
     end
   end

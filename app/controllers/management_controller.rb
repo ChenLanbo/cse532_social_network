@@ -23,7 +23,7 @@ class ManagementController < ApplicationController
 
   def destroy
 		session[:manager_id] = nil
-		redirect_to 'management/new'
+		redirect_to '/management/new'
   end
 
   def index

@@ -1,25 +1,27 @@
-= form_for @advertisement do |f|
-  -if @advertisement.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@advertisement.errors.count, "error")} prohibited this advertisement from being saved:"
-      %ul
-        - @advertisement.errors.full_messages.each do |msg|
-          %li= msg
+.newAd
+	%h3 New Ad
+	= form_for(@advertisement, :remote => true) do |f|
+		-if @advertisement.errors.any?
+			#error_explanation
+				%h2= "#{pluralize(@advertisement.errors.count, "error")} prohibited this advertisement from being saved:"
+				%ul
+					- @advertisement.errors.full_messages.each do |msg|
+						%li= msg
 
-  .field
-    = f.label :type
-    = f.text_field :type
-  .field
-    = f.label :company
-    = f.text_field :company
-  .field
-    = f.label :item_name
-    = f.text_field :item_name
-  .field
-    = f.label :unit_price
-    = f.text_field :unit_price
-  .field
-    = f.label :quantity
-    = f.number_field :quantity
-  .actions
-    = f.submit 'Save'
+		.field
+			= f.label :category
+			= f.text_field :category, :size => 15
+		.field
+			= f.label :company
+			= f.text_field :company, :size => 15
+		.field
+			= f.label :item_name
+			= f.text_field :item_name, :size => 15
+		.field
+			= f.label :unit_price
+			= f.text_field :unit_price, :size => 15
+		.field
+			= f.label :quantity
+			= f.number_field :quantity, :size => 15, :in => 1..10000
+		.actions
+			= f.submit 'Save'

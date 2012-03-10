@@ -7,8 +7,8 @@
  */
 
 body {
-	margin-left: 200px;
-	margin-right: 200px;
+	margin-left: 175px;
+	margin-right: 175px;
 }
 
 a {
@@ -64,11 +64,14 @@ ul {
 
 #mainBar {
 	margin: 15px;
+	position: relative;
 	float: left;
 	width: 500px;
 }
 
 #rightBar {
+	width: 150px;
 	padding: 15px;
+	float: left;
 }
 

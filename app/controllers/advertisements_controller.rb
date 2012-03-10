@@ -30,6 +30,7 @@ class AdvertisementsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
+			format.js
       format.json { render :json => @advertisement }
     end
   end
@@ -46,7 +47,9 @@ class AdvertisementsController < ApplicationController
 
     respond_to do |format|
       if @advertisement.save
-        format.html { redirect_to @advertisement, :notice => 'Advertisement was successfully created.' }
+        # format.html { redirect_to @advertisement, :notice => 'Advertisement was successfully created.' }
+				format.html { redirect_to '/management/index' }
+				format.js
         format.json { render :json => @advertisement, :status => :created, :location => @advertisement }
       else
         format.html { render :action => "new" }
@@ -79,6 +82,7 @@ class AdvertisementsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to advertisements_url }
+			format.js
       format.json { head :ok }
     end
   end

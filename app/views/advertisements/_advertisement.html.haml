@@ -1,0 +1,21 @@
+.aAd
+	%ul
+		%li
+			Category:
+			= advertisement.category
+		%li
+			Company:
+			= advertisement.company
+		%li
+			Name:
+			= advertisement.item_name
+		%li
+			Price:
+			= advertisement.unit_price
+		%li
+			Quantity:
+			= advertisement.quantity
+		%li
+			= link_to 'Show', advertisement
+			= link_to 'Edit', edit_advertisement_path(advertisement)
+			= link_to 'Delete', advertisement, :confirm => 'Are you sure?', :method => :delete, :remote => true
