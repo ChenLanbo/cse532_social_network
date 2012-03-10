@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 	has_many :posts, :dependent => :destroy
 	has_many :comments, :dependent => :destroy
 	has_many :messages, :dependent => :destroy
+	has_many :sales
 
 	# Validations
 	validates :first_name, :presence => true

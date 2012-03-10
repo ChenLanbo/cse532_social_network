@@ -28,6 +28,11 @@ class PurchaseController < ApplicationController
 
 		@sale.save
 
+		@ad = Advertisement.find(params[:ad_id])
+		q = @ad.quantity - @sale.quantity
+
+		@ad.update_attributes(:quantity => q)
+
 		redirect_to '/purchase/history'
   end
 
