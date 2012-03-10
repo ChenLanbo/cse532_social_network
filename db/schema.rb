@@ -10,16 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120309071017) do
+ActiveRecord::Schema.define(:version => 20120310023608) do
 
   create_table "advertisements", :force => true do |t|
-    t.string   "type"
     t.string   "company"
     t.string   "item_name"
     t.decimal  "unit_price"
     t.integer  "quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "category"
   end
 
   create_table "circle_members", :force => true do |t|
