@@ -1,5 +1,8 @@
 class AdvertisementsController < ApplicationController
 	skip_before_filter :authorize
+
+	before_filter :check_manager
+
   # GET /advertisements
   # GET /advertisements.json
   def index
@@ -7,6 +10,7 @@ class AdvertisementsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
+			format.js
       format.json { render :json => @advertisements }
     end
   end
@@ -29,6 +33,7 @@ class AdvertisementsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
+			format.js
       format.json { render :json => @advertisement }
     end
   end
@@ -45,7 +50,7 @@ class AdvertisementsController < ApplicationController
 
     respond_to do |format|
       if @advertisement.save
-        format.html { redirect_to @advertisement, :notice => 'Advertisement was successfully created.' }
+        format.html { redirect_to advertisements_url, :notice => 'Advertisement was successfully created.' }
         format.json { render :json => @advertisement, :status => :created, :location => @advertisement }
       else
         format.html { render :action => "new" }
@@ -81,4 +86,13 @@ class AdvertisementsController < ApplicationController
       format.json { head :ok }
     end
   end
+
+	protected
+	
+	def check_manager
+		unless session[:manager_id]
+			redirect_to '/management/new'
+		end
+	end
+
 end

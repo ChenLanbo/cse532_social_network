@@ -1,5 +1,10 @@
 Cse532SocialNetwork::Application.routes.draw do
 
+	get "management/new"
+	post "management/create"
+	delete "management/delete"
+	get "management/index"
+
   resources :sales
 
   resources :advertisements
