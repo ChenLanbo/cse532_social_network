@@ -11,7 +11,11 @@
 # It's strongly recommended to check this file into your version control system.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20120309071017) do
+=======
+ActiveRecord::Schema.define(:version => 20120310021541) do
+>>>>>>> parent of aadd33c... On branch beta
 =======
 ActiveRecord::Schema.define(:version => 20120310021541) do
 >>>>>>> parent of aadd33c... On branch beta
