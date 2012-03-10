@@ -1,0 +1,9 @@
+.adHeader
+	%h2 Advertisements
+	%ul
+		%li= link_to 'New Ad', new_advertisement_path, :remote => true
+		%li= link_to 'All Ads', advertisements_url, :remote => true
+
+.adMain
+	= render @advertisements
+

@@ -1,0 +1,12 @@
+%h2 Site Manager Login
+
+= form_tag '/management/create' do
+	%table
+		%tr
+			%td= label_tag 'Account'
+			%td= text_field_tag :account
+		%tr
+			%td= label_tag 'Password'
+			%td= password_field_tag :password
+		%tr
+			%td= submit_tag 'Login'
