@@ -1,2 +1,10 @@
-%h1 Management#new
-%p Find me in app/views/management/new.html.haml
+= form_tag('/management/create', :method => :post) do
+	%table
+		%tr
+			%td= label_tag :account
+			%td= text_field_tag 'account'
+		%tr
+			%td= label_tag :password
+			%td= password_field_tag 'password'
+		%tr
+			%td= submit_tag :login
