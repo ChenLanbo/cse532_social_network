@@ -1,6 +1,12 @@
 class PurchaseController < ApplicationController
   def index
-		@advertisements = Advertisement.all
+		@advertisements = []
+
+		if Preference.where("user_id = #{session[:user_id]}")
+			@advertisements = Advertisement.find_by_sql("SELECT a.* FROM advertisements AS a, preferences AS p WHERE a.quantity > 0 AND a.category = p.interest AND p.user_id = #{session[:user_id]} AND a.id NOT IN (SELECT advertisement_id FROM sales WHERE user_id = #{session[:user_id]})")
+		else
+			@advertisements = Advertisement.find_by_sql("SELECT * FROM advertisements WHERE quantity > 0 ORDER BY updated_at DESC LIMIT 20")
+		end
   end
 
   def history

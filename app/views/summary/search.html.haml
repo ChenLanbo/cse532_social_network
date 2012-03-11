@@ -30,7 +30,7 @@
 			.searchForm
 				= form_tag('/summary/query', :remote => true) do
 					%p Search By Type
-					= text_field_tag :type, nil, :placeholder => 'Company', :size => 23, :id => :type
+					= text_field_tag :type, nil, :placeholder => 'Category', :size => 23, :id => :type
 					= submit_tag :search
 		.result
 

@@ -17,3 +17,15 @@
 	%p
 		%b Transactions
 	= render @trans
+
+	- if @res == 1
+		%p
+			%b People who have bought this product
+
+		- @users.each do |u|
+			%p
+				= u.id
+				\|
+				= u.first_name + " " + u.last_name
+				\|
+				= u.email

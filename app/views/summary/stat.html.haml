@@ -10,5 +10,14 @@
 			%li= link_to 'Search', '/summary/search'
 	
 	.summaryMain
+		#topUser
+			- if @user
+				%p= "Top User: " + @user.first_name + " " + @user.last_name
+				%p= "Revenue: " + @user_revenue.to_s
+
+		#topAd
+			- if @ad
+				%p= "Top Product: " + @ad.item_name + " ( " + @ad.company + " ) "
+				%p= "Revenue: " + @ad_revenue.to_s
 
 #rightBar
