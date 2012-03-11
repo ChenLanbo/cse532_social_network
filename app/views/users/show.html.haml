@@ -20,3 +20,7 @@
 				= @user.address
 	- if @user.id == session[:user_id]
 		= link_to 'Edit your profile', edit_user_path(@user)
+
+#rightBar
+	
+	= render 'preferences/form'

@@ -15,7 +15,8 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-
+		@preference = Preference.new
+		@preferences = Preference.find_by_sql("SELECT * FROM preferences WHERE user_id = #{session[:user_id]}")
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @user }

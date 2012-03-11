@@ -41,13 +41,18 @@ class PreferencesController < ApplicationController
   # POST /preferences.json
   def create
     @preference = Preference.new(params[:preference])
+		@preference.user_id = session[:user_id]
 
     respond_to do |format|
-      if @preference.save
+			if Preference.find_by_interest(@preference.interest) == nil
+      	@preference.save
         format.html { redirect_to @preference, :notice => 'Preference was successfully created.' }
+				format.js
         format.json { render :json => @preference, :status => :created, :location => @preference }
       else
+				@preference.id = -1
         format.html { render :action => "new" }
+				format.js
         format.json { render :json => @preference.errors, :status => :unprocessable_entity }
       end
     end
@@ -77,6 +82,7 @@ class PreferencesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to preferences_url }
+			format.js
       format.json { head :ok }
     end
   end

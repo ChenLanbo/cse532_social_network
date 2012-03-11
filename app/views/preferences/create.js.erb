@@ -1,0 +1,5 @@
+// $('.preferenceList').bind('ajax:success', function(){ });
+<% if @preference.id > 0 %>
+	$('.preferenceList').append('<%= escape_javascript(render @preference) %>');
+<% end %>
+$('#preference_interest').attr('value', '');

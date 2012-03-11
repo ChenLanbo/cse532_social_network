@@ -7,8 +7,8 @@
  */
 
 body {
-	margin-left: 175px;
-	margin-right: 175px;
+	margin-left: 170px;
+	margin-right: 170px;
 }
 
 a {
@@ -54,7 +54,7 @@ ul {
 }
 
 #leftBar {
-	width: 150px;
+	width: 200px;
 	border: 1px solid #B8D4E8;
 	background-color: #F0F5F8;
 	padding: 15px;
@@ -70,7 +70,7 @@ ul {
 }
 
 #rightBar {
-	width: 150px;
+	width: 200px;
 	padding: 15px;
 	float: left;
 }
