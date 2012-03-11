@@ -1,0 +1,19 @@
+%h3 Query Result
+- if @res == 0
+	%p= "User: " + params[:first_name] + " " + params[:last_name]
+
+- elsif @res == 1
+	%p= "Product: " + params[:item_name]
+
+- elsif @res == 2
+	%p= "Company: " + params[:company]
+
+- elsif @res == 3
+	%p= "Type: " + params[:type]
+
+%p= 'Revenue: ' + @total.to_s
+%p= 'Num of Transactions: ' + @trans.length.to_s
+.saleList
+	%p
+		%b Transactions
+	= render @trans

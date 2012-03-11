@@ -1,23 +1,15 @@
-%h1 Listing sales
+= render 'layouts/header'
+= render 'layouts/left_bar'
 
-%table
-  %tr
-    %th Advertisement
-    %th User
-    %th Quantity
-    %th
-    %th
-    %th
+#mainBar
+	.saleHeader
+		%h2 Sales
+		%ul
+			%li= link_to 'All Transactions', '/sales', :remote => true
+			%li= link_to 'Search', '/sales'
 
-  - @sales.each do |sale|
-    %tr
-      %td= sale.advertisement_id
-      %td= sale.user_id
-      %td= sale.quantity
-      %td= link_to 'Show', sale
-      %td= link_to 'Edit', edit_sale_path(sale)
-      %td= link_to 'Destroy', sale, :confirm => 'Are you sure?', :method => :delete
+	.saleMain
+		.saleList
+			= render @sales
 
-%br
-
-= link_to 'New Sale', new_sale_path
+#rightBar

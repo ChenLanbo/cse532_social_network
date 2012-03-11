@@ -16,6 +16,6 @@
 			= link_to "Purchase", :controller => :purchase, :action => :index
 	- elsif session[:manager_id]
 		%div
-			= link_to "Ads", '/advertisements', :remote => true
+			= link_to "Ads", '/advertisements'
 		%div
-			= link_to "Sales", '/sales', :remote => true
+			= link_to "Sales Summary", '/summary/transaction'

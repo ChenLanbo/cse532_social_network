@@ -1,0 +1,15 @@
+= render 'layouts/header'
+= render 'layouts/left_bar'
+
+#mainBar
+	.adHeader
+		%h2 Advertisements
+		%ul
+			%li= link_to 'New Advertisement', new_advertisement_path, :remote => true
+			%li= link_to 'Show All', '/advertisements', :remote => true
+
+	.adMain
+		.adList
+			= render @advertisements
+
+#rightBar

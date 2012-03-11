@@ -48,7 +48,7 @@ class AdvertisementsController < ApplicationController
     respond_to do |format|
       if @advertisement.save
         # format.html { redirect_to @advertisement, :notice => 'Advertisement was successfully created.' }
-				format.html { redirect_to '/management/index' }
+				format.html { redirect_to '/advertisements' }
 				format.js
         format.json { render :json => @advertisement, :status => :created, :location => @advertisement }
       else

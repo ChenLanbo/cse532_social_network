@@ -1,5 +1,10 @@
 Cse532SocialNetwork::Application.routes.draw do
 
+  get "summary/transaction"
+  get "summary/stat"
+	get "summary/search"
+	post "summary/query"
+
   get "purchase/index"
   get "purchase/history"
   get "purchase/new"
