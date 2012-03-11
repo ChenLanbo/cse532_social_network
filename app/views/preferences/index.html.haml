@@ -1,0 +1,21 @@
+%h1 Listing preferences
+
+%table
+  %tr
+    %th User
+    %th Interest
+    %th
+    %th
+    %th
+
+  - @preferences.each do |preference|
+    %tr
+      %td= preference.user_id
+      %td= preference.interest
+      %td= link_to 'Show', preference
+      %td= link_to 'Edit', edit_preference_path(preference)
+      %td= link_to 'Destroy', preference, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Preference', new_preference_path

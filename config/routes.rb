@@ -1,5 +1,7 @@
 Cse532SocialNetwork::Application.routes.draw do
 
+  resources :preferences
+
   get "summary/transaction"
   get "summary/stat"
 	get "summary/search"
