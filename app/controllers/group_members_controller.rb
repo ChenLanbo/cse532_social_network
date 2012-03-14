@@ -59,13 +59,13 @@ class GroupMembersController < ApplicationController
     @group_member = GroupMember.find(params[:id])
 
     respond_to do |format|
-      if @group_member.update_attributes(params[:group_member])
-        format.html { redirect_to @group_member, :notice => 'Group member was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.json { render :json => @group_member.errors, :status => :unprocessable_entity }
-      end
+			if @group_member.moderator == true
+      	@group_member.update_attributes(:moderator => false)
+			else
+      	@group_member.update_attributes(:moderator => true)
+			end
+
+			format.js
     end
   end
 
@@ -77,6 +77,7 @@ class GroupMembersController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to group_members_url }
+			format.js
       format.json { head :ok }
     end
   end

@@ -1,0 +1,5 @@
+<% if @group_member.moderator == true %>
+	$('#moderator').html('Del as Moderator');
+<% else %>
+	$('#moderator').html('Set as Moderator');
+<% end %>

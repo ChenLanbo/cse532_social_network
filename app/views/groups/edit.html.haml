@@ -1,7 +1,27 @@
-%h1 Editing group
+= render 'layouts/header'
+= render 'layouts/left_bar'
 
-= render 'form'
+#mainBar
+	%h2 Edit group
+	= link_to 'Go Back', '/groups'
+	%br
+	- if @group.user_id == session[:user_id]
+		= form_for @group do |f|
+			.field
+				= f.text_field :name, :size => 15, :value => @group.name
+				= f.submit 'Update Group Name'
 
-= link_to 'Show', @group
-\|
-= link_to 'Back', groups_path
+	.memberList
+		- @group_members.each do |m|
+			.aGroupMember
+				%p= m.first_name + " " + m.last_name
+				%ul
+					- if @group.user_id == m.user_id
+						%p Host
+					- elsif @group.user_id == session[:user_id]
+						- if m.moderator == true
+							= link_to 'Del as Moderator', m, :method => :put, :remote => true, :id => :moderator
+						- else
+							= link_to 'Set as Moderator', m, :method => :put, :remote => true, :id => :moderator
+					- if @group.user_id != m.user_id and m.user_id != session[:user_id] and session[:moderator]
+						= link_to 'Remove', m, :method => :delete, :remote => true

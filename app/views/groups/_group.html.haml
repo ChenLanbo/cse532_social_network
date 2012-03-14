@@ -1,10 +1,8 @@
 .aGroup
+	%b= link_to group.name, group
+
 	- if group.user_id == session[:user_id]
-		%b= link_to group.name, group
-		= link_to 'Rename', edit_group_path(group)
-		\|
-		= link_to 'Request', group_requests_url + "?group_id=#{group.id}"
-		\|
-		= link_to 'Destory', group, :confirm => 'Are you sure?', :method => :delete
-	- else
-		%b= link_to group.name, group
+		%li= link_to 'Destory', group, :confirm => 'Are you sure?', :method => :delete
+	- if group.moderator == 't'
+		%li= link_to 'Request', group_requests_url + "?group_id=#{group.id}"
+		%li= link_to 'Edit', edit_group_path(group)

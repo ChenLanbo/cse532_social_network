@@ -2,7 +2,15 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.find_by_sql("SELECT * from groups WHERE user_id = #{session[:user_id]} or id in (SELECT group_id FROM group_members WHERE user_id = #{session[:user_id]})")
+     # @groups = Group.find_by_sql("SELECT groups.* from groups, group_members WHERE groups.user_id = #{session[:user_id]} or id in (SELECT group_id FROM group_members WHERE user_id = #{session[:user_id]})")
+
+		@groups = Group.find_by_sql("SELECT g.*, gm.moderator FROM groups AS g, group_members AS gm WHERE g.id = gm.group_id AND gm.user_id = #{session[:user_id]}")
+
+		@groups.each do |g|
+			puts g.moderator
+			puts g.moderator.class
+		end
+
 		# Bug here
 		@group_request = GroupRequest.new
     respond_to do |format|
@@ -36,6 +44,14 @@ class GroupsController < ApplicationController
   # GET /groups/1/edit
   def edit
     @group = Group.find(params[:id])
+
+		if GroupMember.find_by_sql("SELECT * from group_members WHERE group_id = #{@group.id} AND user_id = #{session[:user_id]} LIMIT 1")[0].moderator
+			session[:moderator] = true
+		else
+			session[:moderator] = false
+		end
+
+		@group_members = GroupMember.find_by_sql("SELECT group_members.*, users.first_name, users.last_name FROM group_members, users WHERE group_members.group_id = #{@group.id} AND group_members.user_id = users.id")
   end
 
   # POST /groups
@@ -48,6 +64,7 @@ class GroupsController < ApplicationController
       if @group.save
 
 				@page = Page.create(:owner => @group.id, :category => 'group')
+				@group_member = GroupMember.create(:group_id => @group.id, :user_id => session[:user_id], :moderator => true)
         format.html { redirect_to groups_url, :notice => 'Group was successfully created.' }
         format.json { render :json => @group, :status => :created, :location => @group }
       else

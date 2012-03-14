@@ -69,7 +69,7 @@ class GroupRequestsController < ApplicationController
     @group_request = GroupRequest.find(params[:id])
 
 		respond_to do |format|
-			@group_member = GroupMember.create(:group_id => @group_request.group_id, :user_id => @group_request.user_id)
+			@group_member = GroupMember.create(:group_id => @group_request.group_id, :user_id => @group_request.user_id, :moderator => false)
 			@group_request.destroy
 			format.html { redirect_to "/group_requests?group_id=#{@group_member.group_id}"}
 			format.js
