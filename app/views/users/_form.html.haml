@@ -8,21 +8,21 @@
 
 	.field
 		= f.label :first_name
-		= f.text_field :first_name
+		= f.text_field :first_name, :size => 20
 	.field
 		= f.label :last_name
-		= f.text_field :last_name
+		= f.text_field :last_name, :size => 20
 	.field
 		= f.label :email
-		= f.text_field :email
+		= f.text_field :email, :size => 20
 	.field
 		= f.label :email_confirmation, 'Re-enter Email'
-		= f.text_field :email_confirmation
+		= f.text_field :email_confirmation, :size => 20
 	.field
 		= f.label :password, 'Password'
-		= f.password_field :password
+		= f.password_field :password, :size => 20
 	.field
 		= f.label :password_confirmation, 'Re-enter Password'
-		= f.password_field :password_confirmation
+		= f.password_field :password_confirmation, :size => 20
 	.actions
-		= f.submit 'Save'
+		= f.submit 'Register'
