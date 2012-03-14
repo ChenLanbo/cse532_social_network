@@ -7,8 +7,8 @@
  */
 
 body {
-	margin-left: 170px;
-	margin-right: 170px;
+	margin-left: 150px;
+	margin-right: 150px;
 }
 
 a {
@@ -21,6 +21,10 @@ textarea {
 
 ul {
 	list-style: none;
+}
+
+#main {
+	width: 1000px;
 }
 
 #header {
@@ -50,8 +54,6 @@ ul {
 }
 
 
-#main {
-}
 
 #leftBar {
 	width: 200px;

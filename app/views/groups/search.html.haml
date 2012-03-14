@@ -3,9 +3,17 @@
 
 #mainBar
 	.groupSearchHeader
+		%h3 Search Group
+		= form_tag('/groupsearch', :method => :get) do
+			= text_field_tag :name, nil, :placeholder => 'Group Name', :size => 20
+			= submit_tag 'search'
+	
+	- if @groups.length > 0
 		%h3 Groups you may have interest
+
 	- @groups.each do |g|
-		%b= g.name
-		= form_for(@group_request, :remote => true) do |form|
-			= hidden_field_tag :group_id, g.id
-			= form.submit 'Join'
+		.aGroup
+			%b= g.name
+			= form_for(@group_request, :remote => true) do |form|
+				= hidden_field_tag :group_id, g.id
+				= form.submit 'Join'

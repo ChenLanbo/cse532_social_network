@@ -108,7 +108,12 @@ class GroupsController < ApplicationController
 
 	# GET /groupsearch
 	def search
-		@groups = Group.find_by_sql("SELECT * from groups WHERE user_id != '#{session[:user_id]}' AND id NOT IN (SELECT group_id FROM group_members WHERE user_id = #{session[:user_id]})")
+		@groups = []
+		if params[:name] and params[:name].length > 0
+			@groups = Group.find_by_sql("SELECT * from groups WHERE user_id != '#{session[:user_id]}' AND name = '#{params[:name]}' AND id NOT IN (SELECT group_id FROM group_members WHERE user_id = #{session[:user_id]})")
+		else
+			@groups = Group.find_by_sql("SELECT * from groups WHERE user_id != '#{session[:user_id]}' AND id NOT IN (SELECT group_id FROM group_members WHERE user_id = #{session[:user_id]})")
+		end
 		@group_request = GroupRequest.new
 		render
 	end
