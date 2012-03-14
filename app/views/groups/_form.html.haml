@@ -7,7 +7,5 @@
           %li= msg
 
   .field
-    = f.label :name
-    = f.text_field :name
-  .actions
+    = f.text_field :name, :size => 20, :placeholder => 'Group Name'
     = f.submit 'Create'

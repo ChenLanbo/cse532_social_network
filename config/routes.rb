@@ -1,7 +1,5 @@
 Cse532SocialNetwork::Application.routes.draw do
 
-  resources :group_moderators
-
   resources :preferences
 
   get "summary/transaction"

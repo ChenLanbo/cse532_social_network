@@ -43,6 +43,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(params[:group])
 		@group.user_id = session[:user_id]
+
     respond_to do |format|
       if @group.save
 
