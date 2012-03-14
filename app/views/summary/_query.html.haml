@@ -13,11 +13,8 @@
 
 %p= 'Revenue: ' + @total.to_s
 %p= 'Num of Transactions: ' + @trans.length.to_s
-.saleList
-	%p
-		%b Transactions
-	= render @trans
 
+.userList
 	- if @res == 1
 		%p
 			%b People who have bought this product
@@ -29,3 +26,15 @@
 				= u.first_name + " " + u.last_name
 				\|
 				= u.email
+
+.adList
+	- if @res == 2
+		%p
+			%b Products
+		- @ads.each do |a|
+			%p= a.item_name + " " + a.sold.to_s + " sold"
+
+.saleList
+	%p
+		%b Transactions
+	= render @trans

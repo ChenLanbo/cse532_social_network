@@ -3,9 +3,9 @@ class PurchaseController < ApplicationController
 		@advertisements = []
 
 		if Preference.where("user_id = #{session[:user_id]}")
-			@advertisements = Advertisement.find_by_sql("SELECT a.* FROM advertisements AS a, preferences AS p WHERE a.quantity > 0 AND a.category = p.interest AND p.user_id = #{session[:user_id]} AND a.id NOT IN (SELECT advertisement_id FROM sales WHERE user_id = #{session[:user_id]})")
+			@advertisements = Advertisement.find_by_sql("SELECT a.* FROM advertisements AS a, preferences AS p WHERE (a.quantity - a.sold) > 0 AND a.category = p.interest AND p.user_id = #{session[:user_id]} AND a.id NOT IN (SELECT advertisement_id FROM sales WHERE user_id = #{session[:user_id]})")
 		else
-			@advertisements = Advertisement.find_by_sql("SELECT * FROM advertisements WHERE quantity > 0 ORDER BY updated_at DESC LIMIT 20")
+			@advertisements = Advertisement.find_by_sql("SELECT * FROM advertisements WHERE (quantity - sold) > 0 ORDER BY updated_at DESC LIMIT 20")
 		end
   end
 
@@ -31,13 +31,10 @@ class PurchaseController < ApplicationController
 		@sale.advertisement_id = params[:ad_id]
 		@sale.user_id = params[:user_id]
 		@sale.quantity = params[:quantity]
-
 		@sale.save
 
 		@ad = Advertisement.find(params[:ad_id])
-		q = @ad.quantity - @sale.quantity
-
-		@ad.update_attributes(:quantity => q)
+		@ad.update_attributes(:sold => @ad.sold + @sale.quantity)
 
 		redirect_to '/purchase/history'
   end

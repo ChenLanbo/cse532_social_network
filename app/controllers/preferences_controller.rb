@@ -44,7 +44,7 @@ class PreferencesController < ApplicationController
 		@preference.user_id = session[:user_id]
 
     respond_to do |format|
-			if Preference.find_by_interest(@preference.interest) == nil
+			if Preference.where("user_id = #{session[:user_id]} and interest = '#{@preference.interest}'").length == 0
       	@preference.save
         format.html { redirect_to @preference, :notice => 'Preference was successfully created.' }
 				format.js

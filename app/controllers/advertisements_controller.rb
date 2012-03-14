@@ -44,7 +44,7 @@ class AdvertisementsController < ApplicationController
   # POST /advertisements.json
   def create
     @advertisement = Advertisement.new(params[:advertisement])
-
+		@advertisement.sold = 0
     respond_to do |format|
       if @advertisement.save
         # format.html { redirect_to @advertisement, :notice => 'Advertisement was successfully created.' }

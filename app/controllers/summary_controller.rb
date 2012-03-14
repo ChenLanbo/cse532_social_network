@@ -62,8 +62,8 @@ class SummaryController < ApplicationController
 
 			if params[:company].length == 0
 			else
-
 				@trans = Sale.find_by_sql("SELECT sales.*, ads.unit_price, ads.item_name, ads.company FROM sales, advertisements AS ads WHERE sales.advertisement_id = ads.id AND ads.company = '#{params[:company]}'")
+				@ads = Advertisement.find_by_sql("SELECT * FROM advertisements AS ads WHERE ads.company = '#{params[:company]}' ORDER BY (ads.sold) DESC")
 			end
 
 		# Query Category
