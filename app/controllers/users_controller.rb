@@ -3,15 +3,14 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-
 		fn = params[:first_name]
 		ln = params[:last_name]
 
-		if fn.length > 0 && ln.length > 0
+		if fn and fn.length > 0 and ln.length > 0
 			@users = User.where("first_name = '#{fn}' and last_name = '#{ln}'")
-		elsif fn.length > 0 && ln.length == 0
+		elsif fn and fn.length > 0 and ln.length == 0
 			@users = User.where("first_name = '#{fn}'")
-		elsif fn.length == 0 && ln.length > 0
+		elsif fn and fn.length == 0 and ln.length > 0
 			@users = User.where("last_name = '#{ln}'")
 		else
 			@users = User.find_by_sql("SELECT * from users WHERE id not in (#{session[:user_id]}) and id not in (SELECT fu_id from friends WHERE user_id = #{session[:user_id]})")

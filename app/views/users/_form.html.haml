@@ -24,5 +24,23 @@
 	.field
 		= f.label :password_confirmation, 'Re-enter Password'
 		= f.password_field :password_confirmation, :size => 20
+	.field
+		= f.label :address
+		= f.text_field :address, :size => 20
+	.field
+		= label_tag :Birthday
+		%br
+		= label_tag :Month
+		= f.number_field :month_of_birth, :value => 1, :in => 1..12
+		%br
+		= label_tag :Day
+		= f.number_field :day_of_birth, :value => 1, :in => 1..31
+		%br
+		= label_tag :Year
+		= f.number_field :year_of_birth, :value => Time.now.year, :in => 1950..Time.now.year
+		%br
+	.field
+		= f.label :gender
+		= f.select :gender, ['male', 'female']
 	.actions
 		= f.submit 'Register'
