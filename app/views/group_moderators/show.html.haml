@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Group:
+  = @group_moderator.group_id
+%p
+  %b User:
+  = @group_moderator.user_id
+
+= link_to 'Edit', edit_group_moderator_path(@group_moderator)
+\|
+= link_to 'Back', group_moderators_path
