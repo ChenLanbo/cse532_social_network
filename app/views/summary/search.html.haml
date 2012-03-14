@@ -5,34 +5,36 @@
 	.summaryHeader
 		%h2 Sales Summary
 		%ul
-			%li= link_to 'Transaction', '/summary/transaction'
+			%li= link_to 'All Transaction', '/summary/transaction'
+			\|
 			%li= link_to 'Stat', '/summary/stat'
+			\|
 			%li= link_to 'Search', '/summary/search'
 
 	.summaryMain
-		.searchList
-			.searchForm
-				= form_tag('/summary/query', :remote => true) do
-					%p Search By User
-					= text_field_tag :first_name, nil, :placeholder => 'First Name', :size => 10, :id => :first_name
-					= text_field_tag :last_name, nil, :placeholder => 'Last Name', :size => 10, :id => :last_name
-					= submit_tag :search
-			.searchForm
-				= form_tag('/summary/query', :remote => true) do
-					%p Search By Item Name
-					= text_field_tag :item_name, nil, :placeholder => 'Item Name', :size => 23, :id => :item_name
-					= submit_tag :search
-			.searchForm
-				= form_tag('/summary/query', :remote => true) do
-					%p Search By Company
-					= text_field_tag :company, nil, :placeholder => 'Company', :size => 23, :id => :company
-					= submit_tag :search
-			.searchForm
-				= form_tag('/summary/query', :remote => true) do
-					%p Search By Type
-					= text_field_tag :type, nil, :placeholder => 'Category', :size => 23, :id => :type
-					= submit_tag :search
 		.result
 
 #rightBar
+	.searchList
+		.searchForm
+			= form_tag('/summary/query', :remote => true) do
+				%p Search By User
+				= text_field_tag :first_name, nil, :placeholder => 'First Name', :size => 10, :id => :first_name
+				= text_field_tag :last_name, nil, :placeholder => 'Last Name', :size => 10, :id => :last_name
+				= submit_tag :search
+		.searchForm
+			= form_tag('/summary/query', :remote => true) do
+				%p Search By Item Name
+				= text_field_tag :item_name, nil, :placeholder => 'Item Name', :size => 23, :id => :item_name
+				= submit_tag :search
+		.searchForm
+			= form_tag('/summary/query', :remote => true) do
+				%p Search By Company
+				= text_field_tag :company, nil, :placeholder => 'Company', :size => 23, :id => :company
+				= submit_tag :search
+		.searchForm
+			= form_tag('/summary/query', :remote => true) do
+				%p Search By Type
+				= text_field_tag :type, nil, :placeholder => 'Category', :size => 23, :id => :type
+				= submit_tag :search
 

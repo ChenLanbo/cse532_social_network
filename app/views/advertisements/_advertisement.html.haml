@@ -13,8 +13,14 @@
 			Price:
 			= advertisement.unit_price
 		%li
+			Number of Sold:
+			= advertisement.sold
+		%li
 			Remaining:
-			= advertisement.quantity
+			= advertisement.quantity - advertisement.sold
+		%li
+			Time:
+			= advertisement.updated_at.localtime
 		%li
 			- if session[:manager_id]
 				= link_to 'Show', advertisement

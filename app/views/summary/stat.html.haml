@@ -5,19 +5,39 @@
 	.summaryHeader
 		%h2 Sales Summary
 		%ul
-			%li= link_to 'Transaction', '/summary/transaction'
+			%li= link_to 'All Transaction', '/summary/transaction'
+			\|
 			%li= link_to 'Stat', '/summary/stat'
+			\|
 			%li= link_to 'Search', '/summary/search'
-	
-	.summaryMain
-		#topUser
-			- if @user
-				%p= "Top User: " + @user.first_name + " " + @user.last_name
-				%p= "Revenue: " + @user_revenue.to_s
 
-		#topAd
-			- if @ad
-				%p= "Top Product: " + @ad.item_name + " ( " + @ad.company + " ) "
-				%p= "Revenue: " + @ad_revenue.to_s
+	.summaryQuery
+		.searchForm
+			%h4	Stat for monthly revenue
+			= form_tag('/summary/stat', :method => :get) do
+				= label_tag :year
+				= number_field_tag :year, Time.now.year, :in => 2011..Time.now.year
+				= label_tag :month
+				= number_field_tag :month, 1, :in => 1..12
+				= submit_tag 'See'
+
+	.summaryMain
+
+		- if params[:year]
+			%p
+				%b= params[:year].to_s + " / " + params[:month].to_s + " stats:"
+			%p
+				%b= "Total Revenue: " + @monthly_revenue.to_s
+			%p
+				%b Transactions:
+			= render @sales
 
 #rightBar
+	#topUser
+		- if @user
+			%p= "Top User: " + @user.first_name + " " + @user.last_name
+			%p= "Revenue: " + @user_revenue.to_s
+	#topAd
+		- if @ad
+			%p= "Top Product: " + @ad.item_name + " ( " + @ad.company + " ) "
+			%p= "Revenue: " + @ad_revenue.to_s

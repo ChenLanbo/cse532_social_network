@@ -26,6 +26,22 @@ class SummaryController < ApplicationController
 			@ad, @ad_revenue = a, total if @ad_revenue < total
 		end
 
+		# Monthly stat
+		if params[:year]
+			params[:year] = params[:year].to_i
+			params[:month] = params[:month].to_i
+			@sales = Sale.find_by_sql("SELECT sales.*, ads.unit_price FROM sales, advertisements AS ads WHERE sales.advertisement_id = ads.id")
+			@sales = @sales.select do |s|
+				s.created_at.year == params[:year] and s.created_at.month == params[:month]
+			end
+			@monthly_revenue = @sales.inject(0) {|sum, s| sum + s.quantity * s.unit_price}
+		end
+
+
+		respond_to do |format|
+			format.html
+			format.js
+		end
 
   end
 

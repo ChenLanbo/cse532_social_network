@@ -17,6 +17,9 @@ Cse532SocialNetwork::Application.routes.draw do
   get "/management/destroy"
   get "/management/index"
 
+  match '/management/login' => 'management#new'
+	match '/management/logout' => 'management#destroy'
+
   resources :sales
 
   resources :advertisements
