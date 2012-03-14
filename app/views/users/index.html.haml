@@ -2,8 +2,15 @@
 = render 'layouts/left_bar'
 
 #mainBar
+	.searchBar
+		%h3 Search
+		= form_tag('/users', :method => :get) do
+			= text_field_tag :first_name, nil, :placeholder => 'First Name', :size => 15
+			= text_field_tag :last_name, nil, :placeholder => 'Last Name', :size => 15
+			= submit_tag 'Search'
+
 	- if @users.length > 0
-		%h2 People you may know
+		%h3 People you may know
 		.userList
 			= render @users
 	- else
