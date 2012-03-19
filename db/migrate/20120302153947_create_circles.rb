@@ -7,10 +7,5 @@ class CreateCircles < ActiveRecord::Migration
       t.timestamps
     end
 
-		execute <<-SQL
-			ALTER TABLE circles
-				ADD CONSTRAINT fk_circles
-					FOREIGN KEY (user_id) REFERENCES users(id)
-		SQL
   end
 end

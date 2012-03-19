@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120319024347) do
+ActiveRecord::Schema.define(:version => 20120319054644) do
 
   create_table "advertisements", :force => true do |t|
     t.string   "company"
@@ -30,6 +30,9 @@ ActiveRecord::Schema.define(:version => 20120319024347) do
     t.datetime "updated_at"
   end
 
+  add_index "circle_members", ["circle_id"], :name => "fk1_circle_members"
+  add_index "circle_members", ["user_id"], :name => "fk2_circle_members"
+
   create_table "circles", :force => true do |t|
     t.string   "name"
     t.integer  "user_id"
@@ -46,6 +49,9 @@ ActiveRecord::Schema.define(:version => 20120319024347) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "comments", ["post_id"], :name => "fk1_comments"
+  add_index "comments", ["user_id"], :name => "fk2_comments"
 
   create_table "friend_requests", :force => true do |t|
     t.integer  "user_id"
@@ -75,12 +81,18 @@ ActiveRecord::Schema.define(:version => 20120319024347) do
     t.boolean  "moderator"
   end
 
+  add_index "group_members", ["group_id"], :name => "fk1_group_members"
+  add_index "group_members", ["user_id"], :name => "fk2_group_members"
+
   create_table "group_requests", :force => true do |t|
     t.integer  "group_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "group_requests", ["group_id"], :name => "fk1_group_requests"
+  add_index "group_requests", ["user_id"], :name => "fk2_group_requests"
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -89,12 +101,17 @@ ActiveRecord::Schema.define(:version => 20120319024347) do
     t.datetime "updated_at"
   end
 
+  add_index "groups", ["user_id"], :name => "fk_groups"
+
   create_table "message_receivers", :force => true do |t|
     t.integer  "message_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "message_receivers", ["message_id"], :name => "fk1_message_receivers"
+  add_index "message_receivers", ["user_id"], :name => "fk2_message_receivers"
 
   create_table "messages", :force => true do |t|
     t.integer  "user_id"
@@ -103,6 +120,8 @@ ActiveRecord::Schema.define(:version => 20120319024347) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "messages", ["user_id"], :name => "fk_messages"
 
   create_table "pages", :force => true do |t|
     t.integer  "owner"
@@ -119,12 +138,17 @@ ActiveRecord::Schema.define(:version => 20120319024347) do
     t.datetime "updated_at"
   end
 
+  add_index "posts", ["page_id"], :name => "fk2_posts"
+  add_index "posts", ["user_id"], :name => "fk1_posts"
+
   create_table "preferences", :force => true do |t|
     t.integer  "user_id"
     t.string   "interest"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "preferences", ["user_id"], :name => "fk_preferences"
 
   create_table "sales", :force => true do |t|
     t.integer  "advertisement_id"
@@ -133,6 +157,9 @@ ActiveRecord::Schema.define(:version => 20120319024347) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "sales", ["advertisement_id"], :name => "fk1_sales"
+  add_index "sales", ["user_id"], :name => "fk2_sales"
 
   create_table "users", :force => true do |t|
     t.string   "first_name"

@@ -7,12 +7,5 @@ class CreateFriendRequests < ActiveRecord::Migration
       t.timestamps
     end
 
-		execute <<-SQL
-			ALTER TABLE friend_requests
-				ADD CONSTRAINT fk1_friend_requests
-					FOREIGN KEY (user_id) REFERENCES users(id),
-				ADD CONSTRAINT fk2_friend_requests
-					FOREIGN KEY (requester_id) REFERENCES users(id)
-		SQL
   end
 end
