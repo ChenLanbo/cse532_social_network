@@ -20,6 +20,7 @@ end
 gem 'jquery-rails'
 
 gem 'haml-rails'
+gem 'db2', '~> 2.6.2'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
