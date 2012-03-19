@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(:version => 20120319024347) do
     t.datetime "updated_at"
   end
 
+  add_index "circles", ["user_id"], :name => "fk_circles"
+
   create_table "comments", :force => true do |t|
     t.integer  "post_id"
     t.integer  "user_id"
@@ -52,12 +54,18 @@ ActiveRecord::Schema.define(:version => 20120319024347) do
     t.datetime "updated_at"
   end
 
+  add_index "friend_requests", ["requester_id"], :name => "fk2_friend_requests"
+  add_index "friend_requests", ["user_id"], :name => "fk1_friend_requests"
+
   create_table "friends", :force => true do |t|
     t.integer  "user_id"
     t.integer  "fu_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "friends", ["fu_id"], :name => "fk2_friends"
+  add_index "friends", ["user_id"], :name => "fk1_friends"
 
   create_table "group_members", :force => true do |t|
     t.integer  "group_id"
@@ -124,20 +132,6 @@ ActiveRecord::Schema.define(:version => 20120319024347) do
     t.integer  "quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "student", :id => false, :force => true do |t|
-    t.integer "id"
-    t.string  "name",    :limit => 20
-    t.string  "address", :limit => 50
-    t.string  "status",  :limit => 10
-  end
-
-  create_table "transcript", :id => false, :force => true do |t|
-    t.integer "studId"
-    t.string  "crsCode",  :limit => 6
-    t.string  "semester", :limit => 6
-    t.string  "grade",    :limit => 1
   end
 
   create_table "users", :force => true do |t|
