@@ -3,17 +3,18 @@ require 'digest/sha2'
 class User < ActiveRecord::Base
 	# Dependencies
 	has_many :friends, :dependent => :destroy
-	has_many :friends_requests, :dependent => :destroy
+	has_many :friend_requests, :dependent => :destroy
 	has_many :circles, :dependent => :destroy
 	has_many :circle_members, :dependent => :destroy
 	has_many :groups, :dependent => :destroy
-	has_many :group_moderators, :dependent => :destroy
 	has_many :group_members, :dependent => :destroy
 	has_many :group_requests, :dependent => :destroy
 	has_many :posts, :dependent => :destroy
 	has_many :comments, :dependent => :destroy
 	has_many :messages, :dependent => :destroy
 	has_many :sales
+	has_many :preferences, :dependent => :destroy
+	has_many :message_receivers, :dependent => :destroy
 
 	# Validations
 	validates :first_name, :presence => true
