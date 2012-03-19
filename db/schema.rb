@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20120319024347) do
   create_table "advertisements", :force => true do |t|
     t.string   "company"
     t.string   "item_name"
-    t.decimal  "unit_price"
+    t.decimal  "unit_price", :precision => 10, :scale => 0
     t.integer  "quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -124,6 +124,20 @@ ActiveRecord::Schema.define(:version => 20120319024347) do
     t.integer  "quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "student", :id => false, :force => true do |t|
+    t.integer "id"
+    t.string  "name",    :limit => 20
+    t.string  "address", :limit => 50
+    t.string  "status",  :limit => 10
+  end
+
+  create_table "transcript", :id => false, :force => true do |t|
+    t.integer "studId"
+    t.string  "crsCode",  :limit => 6
+    t.string  "semester", :limit => 6
+    t.string  "grade",    :limit => 1
   end
 
   create_table "users", :force => true do |t|
