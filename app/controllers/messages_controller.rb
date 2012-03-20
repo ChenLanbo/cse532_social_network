@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.find_by_sql("SELECT messages.*, users.first_name, users.last_name FROM messages, message_receivers, users WHERE messages.id = message_receivers.message_id AND message_receivers.user_id = #{session[:user_id]} AND users.id = messages.user_id")
+    @messages = Message.find_by_sql("SELECT messages.*, users.first_name, users.last_name, message_receivers.id AS rec FROM messages, message_receivers, users WHERE messages.id = message_receivers.message_id AND message_receivers.user_id = #{session[:user_id]} AND users.id = messages.user_id")
 
     respond_to do |format|
       format.html # index.html.erb

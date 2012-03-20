@@ -3,6 +3,6 @@
 
 	- if group.user_id == session[:user_id]
 		%li= link_to 'Destory', group, :confirm => 'Are you sure?', :method => :delete
-	- if group.moderator == 't'
+	- if group.moderator == 't' or group.moderator == 1
 		%li= link_to 'Request', group_requests_url + "?group_id=#{group.id}"
 		%li= link_to 'Edit', edit_group_path(group)

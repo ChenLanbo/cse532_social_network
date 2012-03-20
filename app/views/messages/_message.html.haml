@@ -1,4 +1,7 @@
 .aMessage
 	%p= 'Subject: ' + message.subject
 	%p= 'From: ' + message.first_name + " " + message.last_name
-	%p= link_to 'Show', message, :method => :get, :remote => true
+	%p
+		= link_to 'Show', message, :method => :get, :remote => true
+		\|
+		= link_to 'Delete', "/message_receivers/#{message.rec}", :method => :delete, :remote => true

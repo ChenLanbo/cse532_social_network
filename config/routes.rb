@@ -19,6 +19,7 @@ Cse532SocialNetwork::Application.routes.draw do
 
   match '/management/login' => 'management#new'
 	match '/management/logout' => 'management#destroy'
+	match '/signup' => 'users#new'
 
   resources :sales
 

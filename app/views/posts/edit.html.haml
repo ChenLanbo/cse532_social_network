@@ -1,7 +1,14 @@
-%h1 Editing post
+= render 'layouts/header'
+= render 'layouts/left_bar'
 
-= render 'form'
+#mainBar
+	%h2 Editing post
+	= form_for(@post) do |f|
+		.field
+			= f.hidden_field :page_id, :value => @post.page_id
+		.field
+			= f.text_area :content, :cols => 50, :rows => 2, :value => @post.content
+		.actions
+			= f.submit 'Edit'
 
-= link_to 'Show', @post
-\|
-= link_to 'Back', posts_path
+

@@ -46,12 +46,14 @@ class FriendRequestsController < ApplicationController
 		@friend_request.requester_id = session[:user_id]
 
     respond_to do |format|
-      if @friend_request.save
+      if FriendRequest.find_by_sql("SELECT count(*) as count FROM friend_requests WHERE user_id = #{params[:requester_id]} AND requester_id = #{session[:user_id]}")[0].count == 0
+				@friend_request.save
 				format.html { redirect_to users_path, :notice => 'Friend request was successfully sent.' }
 				format.js
         format.json { render :json => @friend_request, :status => :created, :location => @friend_request }
       else
         format.html { render :action => "new" }
+				format.js
         format.json { render :json => @friend_request.errors, :status => :unprocessable_entity }
       end
     end

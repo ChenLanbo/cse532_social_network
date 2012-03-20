@@ -1,15 +1,10 @@
-%p#notice= notice
+= render 'layouts/header'
+= render 'layouts/left_bar'
 
-%p
-  %b User:
-  = @post.user_id
-%p
-  %b Page:
-  = @post.page_id
-%p
-  %b Content:
-  = @post.content
-
-= link_to 'Edit', edit_post_path(@post)
-\|
-= link_to 'Back', posts_path
+#mainBar
+	%h2 Show Post
+	%p#notice= notice
+	%p
+		%b Content:
+		= @post.content
+	= link_to 'Edit', edit_post_path(@post)

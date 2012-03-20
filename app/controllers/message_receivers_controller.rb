@@ -79,6 +79,7 @@ class MessageReceiversController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to message_receivers_url }
+			format.js
       format.json { head :ok }
     end
   end
