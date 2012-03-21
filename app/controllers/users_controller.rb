@@ -50,6 +50,9 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+		if params[:id] != session[:user_id]
+			redirect_to "/users/#{session[:user_id]}"
+		end
     @user = User.find(params[:id])
   end
 
