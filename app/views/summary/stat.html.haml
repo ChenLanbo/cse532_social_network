@@ -12,17 +12,22 @@
 			%li= link_to 'Search', '/summary/search'
 
 	.summaryMain
-		- if params[:year]
-			%p
-				%b= params[:year].to_s + " / " + params[:month].to_s + " stats:"
+
+		- if params[:ads]
+			%h3 Top Ads
+			= render @ads
 		- else
+			- if params[:year]
+				%p
+					%b= params[:year].to_s + " / " + params[:month].to_s + " stats:"
+			- else
+				%p
+					%b= Time.now.year.to_s + " / " + Time.now.month.to_s + " stats:"
 			%p
-				%b= Time.now.year.to_s + " / " + Time.now.month.to_s + " stats:"
-		%p
-			%b= "Total Revenue: " + @monthly_revenue.to_s
-		%p
-			%b Transactions:
-		= render @sales
+				%b= "Total Revenue: " + @monthly_revenue.to_s
+			%p
+				%b Transactions:
+			= render @sales
 
 #rightBar
 	#topUser
@@ -46,4 +51,9 @@
 						%td= label_tag :month
 						%td= number_field_tag :month, 1, :in => 1..12
 				= submit_tag 'Show Stats'
+		.searchForm
+			%h4 Top Sellings
+			= form_tag('/summary/stat', :method => :get) do
+				= hidden_field_tag :ads, :value => 'sort'
+				= submit_tag 'Show Top Ads'
 

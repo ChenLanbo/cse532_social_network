@@ -14,6 +14,14 @@
 			%p
 				%b Birthday:
 				= @user.month_of_birth.to_s + "/" + @user.day_of_birth.to_s + "/" + @user.year_of_birth.to_s
+		- if @user.gender
+			%p
+				%b Gender:
+				= @user.gender
+		- if @user.phone
+			%p
+				%b Phone:
+				= @user.phone
 		- if @user.address != nil
 			%p
 				%b Address:

@@ -2,7 +2,43 @@
 = render 'layouts/left_bar'
 
 #mainBar
-	= render 'form'
+	= form_for @user do |f|
+		-if @user.errors.any?
+			#error_explanation
+				%h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+				%ul
+					- @user.errors.full_messages.each do |msg|
+						%li= msg
+
+		.field
+			= f.label :first_name
+			= f.text_field :first_name, :size => 20
+		.field
+			= f.label :last_name
+			= f.text_field :last_name, :size => 20
+		.field
+			= f.label :address
+			= f.text_field :address, :size => 20
+		.field
+			= label_tag :Birthday
+			%br
+			= label_tag :Month
+			= f.number_field :month_of_birth, :value => 1, :in => 1..12
+			= label_tag :Day
+			= f.number_field :day_of_birth, :value => 1, :in => 1..31
+			= label_tag :Year
+			= f.number_field :year_of_birth, :value => Time.now.year, :in => 1950..Time.now.year
+		.field
+			= label_tag :Phone
+			= f.text_field :phone, :size => 20
+		.field
+			= f.label :gender
+			= f.select :gender, ['male', 'female']
+		.actions
+			= f.submit 'Update'
+
+
+
 	= link_to 'Show', @user
 	\|
 	= link_to 'Back', users_url + '/' + @user.id.to_s

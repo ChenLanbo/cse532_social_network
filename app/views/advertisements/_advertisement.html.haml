@@ -26,7 +26,8 @@
 				- if session[:manager_id]
 					= link_to 'Show', advertisement
 					= link_to 'Edit', edit_advertisement_path(advertisement)
-					= link_to 'Delete', advertisement, :confirm => 'Are you sure?', :method => :delete, :remote => true
+					- if advertisement.sold == 0
+						= link_to 'Delete', advertisement, :confirm => 'Are you sure?', :method => :delete, :remote => true
 				- elsif session[:user_id]
 					= link_to 'Buy', "/purchase/new?ad=#{advertisement.id}", :remote => true
 

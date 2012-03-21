@@ -51,6 +51,11 @@ class SummaryController < ApplicationController
 			@monthly_revenue = @sales.inject(0) {|sum, s| sum + s.quantity * s.unit_price}
 		end
 
+		puts params[:ads]
+		if params[:ads]
+			@ads = Advertisement.find_by_sql("SELECT * FROM advertisements WHERE sold > 0 ORDER BY sold DESC")
+		end
+
 		respond_to do |format|
 			format.html
 			format.js
@@ -72,6 +77,8 @@ class SummaryController < ApplicationController
 			if params[:first_name].length == 0 or params[:last_name].length == 0
 			else
 				@trans = Sale.find_by_sql("SELECT sales.*, ads.unit_price, ads.item_name, ads.company FROM sales, users, advertisements AS ads WHERE users.first_name = '#{params[:first_name]}' and users.last_name = '#{params[:last_name]}' AND users.id = sales.user_id AND sales.advertisement_id = ads.id")
+				@total = Sale.find_by_sql("SELECT sum(sales.quantity * ads.unit_price) AS sum FROM sales, users, advertisements AS ads WHERE users.first_name = '#{params[:first_name]}' and users.last_name = '#{params[:last_name]}' AND users.id = sales.user_id AND sales.advertisement_id = ads.id")[0].sum
+				@total = 0 if @total == nil
 			end
 
 		# Query Item Name
@@ -79,11 +86,16 @@ class SummaryController < ApplicationController
 			@res = 1
 			if params[:item_name].length == 0
 			else
-				@trans = Sale.find_by_sql("SELECT sales.*, ads.unit_price, ads.item_name, ads.company FROM sales, advertisements AS ads WHERE sales.advertisement_id = ads.id AND ads.item_name = '#{params[:item_name]}'")
-
 				@ad = Advertisement.find_by_item_name(params[:item_name])
-				# @users = User.find_by_sql("SELECT * FROM users, sales WHERE users.id = sales.user_id and sales.advertisement_id = #{@ad.id}")
-				@users = User.find_by_sql("SELECT * FROM users WHERE id in (SELECT user_id FROM sales WHERE sales.advertisement_id = #{@ad.id})")
+				if @ad != nil
+					@trans = Sale.find_by_sql("SELECT sales.*, ads.unit_price, ads.item_name, ads.company FROM sales, advertisements AS ads WHERE sales.advertisement_id = ads.id AND ads.item_name = '#{params[:item_name]}'")
+					@total = Sale.find_by_sql("SELECT sum(sales.quantity * ads.unit_price) AS sum FROM sales, advertisements AS ads WHERE sales.advertisement_id = ads.id AND ads.item_name = '#{params[:item_name]}'")[0].sum
+					@total = 0 if @total == nil
+
+					@users = User.find_by_sql("SELECT * FROM users WHERE id in (SELECT user_id FROM sales WHERE sales.advertisement_id = #{@ad.id})")
+				else
+					@trans, @users = [], []
+				end
 			end
 
 		# Query Company
@@ -102,13 +114,11 @@ class SummaryController < ApplicationController
 
 			if params[:type].length != 0
 				@trans = Sale.find_by_sql("SELECT sales.*, ads.unit_price, ads.item_name, ads.company FROM sales, advertisements AS ads WHERE sales.advertisement_id = ads.id AND ads.category = '#{params[:type]}'")
+				@total = Sale.find_by_sql("SELECT sum(sales.quantity * ads.unit_price) AS sum FROM sales, advertisements AS ads WHERE sales.advertisement_id = ads.id AND ads.category = '#{params[:type]}'")[0].sum
+				@total = 0 if @total == nil
 			end
 
 		else
-		end
-
-		@trans.each do |t|
-			@total += t.quantity * t.unit_price
 		end
 
 		respond_to do |format|

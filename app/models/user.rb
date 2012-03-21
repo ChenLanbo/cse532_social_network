@@ -23,8 +23,8 @@ class User < ActiveRecord::Base
 	# Email
 	validates :email, :presence => true, :uniqueness => true
 	validates :email, :format => { :with => /[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9]+(\.[a-z0-9]+)*(\.[a-z]{2,4})/, :message => "%{value} is not a valid email address" }
-	validates :email, :confirmation => true
-	validates :email_confirmation, :presence => true
+	validates :email, :confirmation => true, :unless => Proc.new { |a| a.id != nil }
+	# validates :email_confirmation, :presence => true
 
 	validates :password, :confirmation => true
 	attr_accessor :password_confirmation
