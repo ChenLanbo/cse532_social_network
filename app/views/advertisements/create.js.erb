@@ -1,2 +1,5 @@
+$('.newAd').bind('ajax:success', function(){
+	$(this).fadeOut();
+	$(this).remote();
+});
 $('.adList').append('<% escape_javascript(render @advertisement) %>');
-$('.newAd').fadeOut();

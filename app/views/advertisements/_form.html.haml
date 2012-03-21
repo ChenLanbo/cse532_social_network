@@ -7,21 +7,21 @@
 				%ul
 					- @advertisement.errors.full_messages.each do |msg|
 						%li= msg
-
-		.field
-			= f.label :category
-			= f.text_field :category, :size => 15
-		.field
-			= f.label :company
-			= f.text_field :company, :size => 15
-		.field
-			= f.label :item_name
-			= f.text_field :item_name, :size => 15
-		.field
-			= f.label :unit_price
-			= f.text_field :unit_price, :size => 15
-		.field
-			= f.label :quantity
-			= f.number_field :quantity, :size => 15, :in => 1..10000
-		.actions
-			= f.submit 'Save'
+		%table
+			%tr.field
+				%td= f.label :category
+				%td= f.text_field :category, :size => 10
+			%tr.field
+				%td= f.label :company
+				%td= f.text_field :company, :size => 10
+			%tr.field
+				%td= f.label :item_name
+				%td= f.text_field :item_name, :size => 10
+			%tr.field
+				%td= f.label :unit_price
+				%td= f.text_field :unit_price, :size => 10
+			%tr.field
+				%td= f.label :quantity
+				%td= f.number_field :quantity, :size => 15, :in => 1..10000
+			%tr.actions
+				%td= f.submit 'Save'

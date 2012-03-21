@@ -7,13 +7,16 @@ class UsersController < ApplicationController
 		ln = params[:last_name]
 
 		if fn and fn.length > 0 and ln.length > 0
-			@users = User.where("first_name = '#{fn}' and last_name = '#{ln}'")
+			# @users = User.where("first_name = '#{fn}' and last_name = '#{ln}'")
+			@users = User.find_by_sql("SELECT * from users WHERE id != (#{session[:user_id]}) AND id NOT IN (SELECT fu_id from friends WHERE user_id = #{session[:user_id]}) and id not in (SELECT user_id FROM friend_requests WHERE requester_id = #{session[:user_id]}) AND first_name = '#{fn}' AND last_name = '#{ln}'")
 		elsif fn and fn.length > 0 and ln.length == 0
-			@users = User.where("first_name = '#{fn}'")
+			# @users = User.where("first_name = '#{fn}'")
+			@users = User.find_by_sql("SELECT * from users WHERE id != (#{session[:user_id]}) AND id not in (SELECT fu_id from friends WHERE user_id = #{session[:user_id]}) and id not in (SELECT user_id FROM friend_requests WHERE requester_id = #{session[:user_id]}) AND first_name = '#{fn}'")
 		elsif fn and fn.length == 0 and ln.length > 0
-			@users = User.where("last_name = '#{ln}'")
+			# @users = User.where("last_name = '#{ln}'")
+			@users = User.find_by_sql("SELECT * from users WHERE id != (#{session[:user_id]}) AND id NOT IN (SELECT fu_id from friends WHERE user_id = #{session[:user_id]}) and id not in (SELECT user_id FROM friend_requests WHERE requester_id = #{session[:user_id]}) AND last_name = '#{ln}'")
 		else
-			@users = User.find_by_sql("SELECT * from users WHERE id not in (#{session[:user_id]}) and id not in (SELECT fu_id from friends WHERE user_id = #{session[:user_id]})")
+			@users = User.find_by_sql("SELECT * from users WHERE id != (#{session[:user_id]}) AND id NOT IN (SELECT fu_id from friends WHERE user_id = #{session[:user_id]}) and id not in (SELECT user_id FROM friend_requests WHERE requester_id = #{session[:user_id]})")
 		end
 
     respond_to do |format|

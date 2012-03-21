@@ -47,7 +47,7 @@ class CirclesController < ApplicationController
 		@circle.user_id = session[:user_id]
 
     respond_to do |format|
-      if @circle.save
+      if @circle.name.length > 0 and @circle.save
         format.html { redirect_to circles_url, :notice => 'Circle was successfully created.' }
 				format.js
         format.json { render :json => @circle, :status => :created, :location => @circle }
@@ -82,6 +82,7 @@ class CirclesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to circles_url }
+			format.js
       format.json { head :ok }
     end
   end

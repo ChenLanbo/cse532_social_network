@@ -1,30 +1,32 @@
 .aAd
-	%ul
-		%li
-			Category:
-			= advertisement.category
-		%li
-			Company:
-			= advertisement.company
-		%li
-			Name:
-			= advertisement.item_name
-		%li
-			Price:
-			= advertisement.unit_price
-		%li
-			Number of Sold:
-			= advertisement.sold
-		%li
-			Remaining:
-			= advertisement.quantity - advertisement.sold
-		%li
-			Time:
-			= advertisement.updated_at.localtime
-		%li
-			- if session[:manager_id]
-				= link_to 'Show', advertisement
-				= link_to 'Edit', edit_advertisement_path(advertisement)
-				= link_to 'Delete', advertisement, :confirm => 'Are you sure?', :method => :delete, :remote => true
-			- elsif session[:user_id]
-				= link_to 'Buy', "/purchase/new?ad=#{advertisement.id}", :remote => true
+	%table
+		%tr
+			%td Category:
+			%td= advertisement.category
+		%tr
+			%td Company:
+			%td= advertisement.company
+		%tr
+			%td Item Name:
+			%td= advertisement.item_name
+		%tr
+			%td Price:
+			%td= advertisement.unit_price
+		%tr
+			%td Quantity:
+			%td= advertisement.quantity
+		%tr
+			%td Number of Sold:
+			%td= advertisement.sold
+		%tr
+			%td Date:
+			%td= advertisement.updated_at.localtime.strftime("%Y-%m-%d")
+		%tr
+			%td
+				- if session[:manager_id]
+					= link_to 'Show', advertisement
+					= link_to 'Edit', edit_advertisement_path(advertisement)
+					= link_to 'Delete', advertisement, :confirm => 'Are you sure?', :method => :delete, :remote => true
+				- elsif session[:user_id]
+					= link_to 'Buy', "/purchase/new?ad=#{advertisement.id}", :remote => true
+

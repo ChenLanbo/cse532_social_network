@@ -2,10 +2,9 @@
 = render 'layouts/left_bar'
 
 #mainBar
-	%h2 Your Circles
-
-	= render 'form'
-
+	.circleHeader
+		%h2 Your Circles
+		= render 'form'
 	.circleList
 		= render @circles
 

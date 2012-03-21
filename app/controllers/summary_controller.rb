@@ -13,30 +13,38 @@ class SummaryController < ApplicationController
 
 		# Top User
 		User.all.each do |u|
-			@sales = Sale.find_by_sql("SELECT sales.*, ads.unit_price FROM sales, advertisements AS ads WHERE sales.user_id = #{u.id} AND sales.advertisement_id = ads.id")
-			total = @sales.inject(0) {|sum, s| sum + s.quantity * s.unit_price}
+			# @sales = Sale.find_by_sql("SELECT sales.*, ads.unit_price FROM sales, advertisements AS ads WHERE sales.user_id = #{u.id} AND sales.advertisement_id = ads.id")
+			# total = @sales.inject(0) {|sum, s| sum + s.quantity * s.unit_price}
+			total = Sale.find_by_sql("SELECT sum(sales.quantity * ads.unit_price) AS sum FROM sales, advertisements AS ads WHERE sales.user_id = #{u.id} AND sales.advertisement_id = ads.id")[0].sum
+			if total == nil
+				next
+			end
 			@user, @user_revenue = u, total if @user_revenue < total
 		end
 
 		# Top Product
 		Advertisement.all.each do |a|
-			@sales = Sale.find_by_sql("SELECT sales.*, ads.unit_price FROM sales, advertisements AS ads WHERE ads.id = #{a.id} AND sales.advertisement_id = ads.id")
-			total = @sales.inject(0) {|sum, s| sum + s.quantity * s.unit_price}
-			puts total
+			# @sales = Sale.find_by_sql("SELECT sales.*, ads.unit_price FROM sales, advertisements AS ads WHERE ads.id = #{a.id} AND sales.advertisement_id = ads.id")
+			# total = @sales.inject(0) {|sum, s| sum + s.quantity * s.unit_price}
+			total = Sale.find_by_sql("SELECT sum(sales.quantity * ads.unit_price) AS sum FROM sales, advertisements AS ads WHERE ads.id = #{a.id} AND sales.advertisement_id = ads.id")[0].sum
+			if total == nil
+				next
+			end
 			@ad, @ad_revenue = a, total if @ad_revenue < total
 		end
 
 		# Monthly stat
 		if params[:year]
-			params[:year] = params[:year].to_i
-			params[:month] = params[:month].to_i
-			@sales = Sale.find_by_sql("SELECT sales.*, ads.unit_price FROM sales, advertisements AS ads WHERE sales.advertisement_id = ads.id")
-			@sales = @sales.select do |s|
-				s.created_at.year == params[:year] and s.created_at.month == params[:month]
-			end
+			# params[:year] = params[:year].to_i
+			# params[:month] = params[:month].to_i
+			st = params[:year] + '-' + params[:month] + '-01 00:00:00'
+			et = params[:year] + '-' + params[:month] + '-31 23:23:23'
+			@sales = Sale.find_by_sql("SELECT sales.*, ads.unit_price FROM sales, advertisements AS ads WHERE sales.advertisement_id = ads.id AND sales.created_at >= '#{st}' AND sales.created_at <= '#{et}'")
+			# @sales = @sales.select do |s|
+			#	s.created_at.year == params[:year] and s.created_at.month == params[:month]
+			# end
 			@monthly_revenue = @sales.inject(0) {|sum, s| sum + s.quantity * s.unit_price}
 		end
-
 
 		respond_to do |format|
 			format.html
@@ -69,7 +77,8 @@ class SummaryController < ApplicationController
 				@trans = Sale.find_by_sql("SELECT sales.*, ads.unit_price, ads.item_name, ads.company FROM sales, advertisements AS ads WHERE sales.advertisement_id = ads.id AND ads.item_name = '#{params[:item_name]}'")
 
 				@ad = Advertisement.find_by_item_name(params[:item_name])
-				@users = User.find_by_sql("SELECT users.* FROM users, sales WHERE users.id = sales.user_id and sales.advertisement_id = #{@ad.id}")
+				# @users = User.find_by_sql("SELECT * FROM users, sales WHERE users.id = sales.user_id and sales.advertisement_id = #{@ad.id}")
+				@users = User.find_by_sql("SELECT * FROM users WHERE id in (SELECT user_id FROM sales WHERE sales.advertisement_id = #{@ad.id})")
 			end
 
 		# Query Company

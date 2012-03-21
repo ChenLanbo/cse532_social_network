@@ -5,7 +5,7 @@
 	.postConent
 		%p= post.content
 		.postEdit
-			= post.updated_at.localtime
+			= post.updated_at.localtime.strftime("%m-%d %H:%M")
 			- if post.user_id == session[:user_id]
 				= link_to 'Delete', post, :method => :delete, :remote => true
 				= link_to 'Edit', "/posts/#{post.id}/edit"
