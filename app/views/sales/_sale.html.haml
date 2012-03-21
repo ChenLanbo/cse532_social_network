@@ -13,5 +13,6 @@
 			Quantity:
 			= sale.quantity
 		%li
-			Time:
-			= sale.updated_at.localtime
+			Date:
+			= sale.updated_at.localtime.strftime("%Y-%m-%d  %H:%M:%S")
+
