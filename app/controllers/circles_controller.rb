@@ -16,12 +16,18 @@ class CirclesController < ApplicationController
   # GET /circles/1.json
   def show
     @circle = Circle.find(params[:id])
-		@circle_members = CircleMember.find_by_sql("SELECT circle_members.*, users.first_name, users.last_name FROM circle_members, users WHERE circle_members.circle_id = #{@circle.id} AND circle_members.user_id = users.id")
+		if @circle == nil or @circle.user_id != session[:user_id]
+			# puts '<<<<<<<<<<<<<<>>>>>>>>>>>>>'
+			# redirect_to "/pages/#{session[:user_id]}"
+			redirect_to "/circles/", :notice => 'Bad Access'
+		else
+			@circle_members = CircleMember.find_by_sql("SELECT circle_members.*, users.first_name, users.last_name FROM circle_members, users WHERE circle_members.circle_id = #{@circle.id} AND circle_members.user_id = users.id")
+			respond_to do |format|
+				format.html # show.html.erb
+				format.json { render :json => @circle }
+			end
+		end
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @circle }
-    end
   end
 
   # GET /circles/new

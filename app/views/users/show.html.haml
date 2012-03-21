@@ -3,7 +3,7 @@
 
 #mainBar
 	.userProfileHeader
-		%h3 Profile
+		%h3 User Profile
 	.userProfile
 		%p
 			%b= @user.first_name + " " + @user.last_name
@@ -30,5 +30,5 @@
 		= link_to 'Edit your profile', edit_user_path(@user)
 
 #rightBar
-	
-	= render 'preferences/form'
+	- if @user.id == session[:user_id]
+		= render 'preferences/form'
