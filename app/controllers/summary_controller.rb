@@ -44,6 +44,11 @@ class SummaryController < ApplicationController
 			#	s.created_at.year == params[:year] and s.created_at.month == params[:month]
 			# end
 			@monthly_revenue = @sales.inject(0) {|sum, s| sum + s.quantity * s.unit_price}
+		else
+			st = Time.now.year.to_s + '-' + Time.now.month.to_s + '-01 00:00:00'
+			et = Time.now.year.to_s + '-' + Time.now.month.to_s + '-31 23:23:23'
+			@sales = Sale.find_by_sql("SELECT sales.*, ads.unit_price FROM sales, advertisements AS ads WHERE sales.advertisement_id = ads.id AND sales.created_at >= '#{st}' AND sales.created_at <= '#{et}'")
+			@monthly_revenue = @sales.inject(0) {|sum, s| sum + s.quantity * s.unit_price}
 		end
 
 		respond_to do |format|

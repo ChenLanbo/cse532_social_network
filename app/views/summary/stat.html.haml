@@ -11,26 +11,18 @@
 			\|
 			%li= link_to 'Search', '/summary/search'
 
-	.summaryQuery
-		.searchForm
-			%h4	Stat for monthly revenue
-			= form_tag('/summary/stat', :method => :get) do
-				= label_tag :year
-				= number_field_tag :year, Time.now.year, :in => 2011..Time.now.year
-				= label_tag :month
-				= number_field_tag :month, 1, :in => 1..12
-				= submit_tag 'See'
-
 	.summaryMain
-
 		- if params[:year]
 			%p
 				%b= params[:year].to_s + " / " + params[:month].to_s + " stats:"
+		- else
 			%p
-				%b= "Total Revenue: " + @monthly_revenue.to_s
-			%p
-				%b Transactions:
-			= render @sales
+				%b= Time.now.year.to_s + " / " + Time.now.month.to_s + " stats:"
+		%p
+			%b= "Total Revenue: " + @monthly_revenue.to_s
+		%p
+			%b Transactions:
+		= render @sales
 
 #rightBar
 	#topUser
@@ -39,5 +31,20 @@
 			%p= "Revenue: " + @user_revenue.to_s
 	#topAd
 		- if @ad
-			%p= "Top Product: " + @ad.item_name + " ( " + @ad.company + " ) "
+			%p= "Top Product: " + @ad.item_name
 			%p= "Revenue: " + @ad_revenue.to_s
+
+	.summaryQuery
+		.searchForm
+			%h4	Stat for monthly revenue
+			= form_tag('/summary/stat', :method => :get) do
+				%table
+					%tr
+						%td= label_tag :year
+						%td= number_field_tag :year, Time.now.year, :in => 2011..Time.now.year
+					%tr
+						%td= label_tag :month
+						%td= number_field_tag :month, 1, :in => 1..12
+					%tr
+						%td= submit_tag 'See'
+
